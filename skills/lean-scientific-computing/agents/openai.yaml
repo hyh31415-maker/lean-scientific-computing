@@ -1,0 +1,4 @@
+interface:
+  display_name: "Lean Scientific Computing"
+  short_description: "Build auditable research code without project bloat"
+  default_prompt: "Use $lean-scientific-computing to implement this research computation with direct scientific traceability and only justified project structure."
