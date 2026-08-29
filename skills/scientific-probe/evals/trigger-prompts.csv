@@ -1,0 +1,13 @@
+id,should_trigger,prompt,expected_behavior
+explicit-01,true,"Use $scientific-probe to test whether optimizer A converges faster than optimizer B on this toy problem.","Define hypotheses and decision rule; run a minimal controlled experiment; stop without building a framework."
+implicit-01,true,"Can this oscillation be explained by numerical instability rather than the proposed physical mechanism? Test the smallest case.","Frame competing explanations and produce a discriminating numerical probe."
+implicit-02,true,"Reproduce the main effect in this paper using the existing code, but do not productize it.","Use a minimal replication with provenance, baseline, seeds, and a stop rule."
+implicit-03,true,"This research repo has 80 files for one figure. Identify what can be removed without weakening the result.","Audit the scientific dependency chain and propose deletions instead of a rewrite."
+implicit-04,true,"Check whether the apparent correlation survives a leakage-free split.","Treat leakage as an inferential threat and run the smallest valid comparison."
+implicit-05,true,"I have two mechanistic explanations for the same data. What is the cheapest simulation that distinguishes them?","Prioritize information gain and predeclare an observable and decision rule."
+implicit-06,true,"Before we build the pipeline, determine whether the effect exists at all.","Run the probe before any engineering design."
+negative-01,false,"Build and deploy a production REST API for our existing validated model.","Follow production engineering requirements; do not impose a scientific probe."
+negative-02,false,"Refactor this service into modules and add integration tests.","Treat as ordinary software maintenance unless a scientific claim is involved."
+negative-03,false,"Create a polished dashboard for results that are already finalized.","Treat as presentation engineering, not hypothesis testing."
+negative-04,false,"Package this stable library for PyPI and add release automation.","Treat as packaging and release engineering."
+mixed-01,true,"We want a web service for this new algorithm, but first verify that it beats the baseline.","Isolate a minimal scientific comparison before service architecture."
