@@ -1,6 +1,6 @@
 interface:
   display_name: "Scientific Probe"
-  short_description: "Minimal experiments, not premature products"
-  default_prompt: "Use $scientific-probe to treat this as a scientific inference task and minimize engineering overhead."
+  short_description: "Discover mechanisms or freeze a decisive scientific test"
+  default_prompt: "Use $scientific-probe to select DISCOVERY, DISCRIMINATION, or REPLICATION mode, define a proportional Probe Contract, and interpret only the evidence actually produced."
 policy:
   allow_implicit_invocation: true

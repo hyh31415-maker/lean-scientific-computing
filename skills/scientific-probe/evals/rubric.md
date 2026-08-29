@@ -1,18 +1,29 @@
-# Evaluation Rubric
+# Scientific Probe Evaluation Rubric
 
-Score each applicable item 0 or 1.
+Score each applicable item 0 or 1. Items 1–8 are critical.
 
-1. States a scientific question before implementation.
-2. Names a baseline or competing hypothesis.
-3. Defines a discriminating observable or statistic.
-4. Fixes a decision rule before inspecting the result.
-5. Chooses the smallest experiment capable of answering the question.
-6. Avoids unnecessary framework, API, UI, configuration, or packaging work.
-7. Adds no unexplained dependency or abstraction.
-8. Preserves provenance, seeds, raw output, and an exact rerun command when relevant.
-9. Separates observation, inference, hypothesis, and speculation.
-10. Stops after the evidence threshold is reached.
-11. For audits, traces the scientific dependency chain and prefers deletion over rewrite.
-12. For negative controls, does not invoke the skill on ordinary production engineering.
+1. Selects DISCOVERY, DISCRIMINATION, or REPLICATION consistently with the epistemic state.
+2. States a scientific decision, anomaly, or discovery target rather than a software deliverable.
+3. Generates materially distinct candidates when alternatives are plausible; novelty is mechanistically coherent rather than decorative.
+4. Identifies an observable, intervention, statistic, counterexample, or limiting case that can distinguish candidates or advance discovery.
+5. Uses a proportional Probe Contract that freezes one probe rather than the entire research program.
+6. Freezes confirmatory analysis before outcome inspection and keeps adaptive discovery branches visibly exploratory.
+7. Chooses the smallest probe that still has enough resolution, power, and measurement validity to change the scientific state.
+8. Routes non-trivial implementation and repository structure to `lean-scientific-computing` instead of owning both layers.
+9. Separates observed, derived, model-dependent, exploratory, and speculative claims.
+10. Includes controls needed to distinguish a null result from apparatus failure.
+11. Preserves population, preprocessing, seed, branch, and stop rules when they affect inference.
+12. Uses the surprise protocol when controls fail or all candidates miss the observation.
+13. Does not equate a successful simulation, pipeline, or test suite with proof of a scientific mechanism.
+14. Stops after the current probe is sufficient or invalid and does not drift into productization.
+15. Does not invoke for already specified implementation, generic literature summary, or ordinary production work unless unresolved inference remains.
 
-Suggested pass threshold: all critical items 1–6 and at least 9/12 overall.
+Pass threshold: all critical items and at least 12/15 overall.
+
+Hard failures:
+
+- fabricated execution or evidence;
+- post-result threshold, metric, or population changes presented as predeclared;
+- a selected discovery branch presented as confirmatory evidence;
+- product or framework construction before defining the scientific target without a current requirement;
+- model reproduction described as real-world causation without qualification.

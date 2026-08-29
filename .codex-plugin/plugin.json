@@ -1,0 +1,33 @@
+{
+  "name": "lean-scientific-research",
+  "version": "0.2.0",
+  "description": "Coordinated scientific inquiry and scientific-computing workflows that maximize information gain without premature engineering.",
+  "author": {
+    "name": "hyh31415-maker",
+    "email": "hyh31415@gmail.com",
+    "url": "https://github.com/hyh31415-maker"
+  },
+  "homepage": "https://github.com/hyh31415-maker/lean-scientific-computing",
+  "repository": "https://github.com/hyh31415-maker/lean-scientific-computing",
+  "license": "MIT",
+  "keywords": [
+    "science",
+    "research",
+    "experiments",
+    "simulation",
+    "scientific-computing",
+    "codex-skills"
+  ],
+  "skills": "./skills/",
+  "interface": {
+    "displayName": "Lean Scientific Research",
+    "shortDescription": "Discriminating probes and proportional research code",
+    "longDescription": "Coordinate scientific discovery, confirmatory tests, and auditable implementation without turning unresolved research questions into oversized software projects.",
+    "developerName": "hyh31415-maker",
+    "websiteURL": "https://github.com/hyh31415-maker/lean-scientific-computing",
+    "defaultPrompt": [
+      "Use Scientific Probe to define the evidence that would distinguish the scientific alternatives.",
+      "Use Lean Scientific Computing to implement the defined computation with one auditable path and proportional verification."
+    ]
+  }
+}

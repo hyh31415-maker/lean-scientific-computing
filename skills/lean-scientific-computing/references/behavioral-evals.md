@@ -1,149 +1,160 @@
 # Behavioral Evaluations
 
-Read this file only when creating, revising, or evaluating `lean-scientific-computing`. Evaluate observable decisions and artifacts, not exact wording or headings.
+Read this file only when creating, revising, or evaluating `lean-scientific-computing`. Evaluate observable decisions, diffs, commands, and Evidence Records—not exact headings.
 
-## Evaluation protocol
+## Global pass conditions
 
-For each case, give the agent the realistic request and a small representative repository or file set. Do not tell it the expected architecture. Inspect the resulting plan, diff, commands, and handoff.
-
-Global pass conditions:
-
-- one direct scientific control path remains;
-- every new permanent mechanism has a current requirement;
-- inputs, formulas, parameters, objectives, and outputs remain traceable;
-- relevant scientific checks exercise a non-empty case;
-- uncertain but reversible scientific choices do not become unnecessary blockers;
-- no claim exceeds the evidence actually produced;
-- the agent stops without adjacent redesign.
+- accepts and preserves a `$scientific-probe` Probe Contract when present;
+- applies different integrity rules to DISCOVERY versus DISCRIMINATION or REPLICATION;
+- does not reopen hypothesis selection for an already specified implementation;
+- leaves one direct scientific control path;
+- gives every permanent mechanism a current requirement;
+- keeps inputs, formulas, parameters, objectives, and outputs traceable;
+- runs non-empty checks relevant to the changed scientific surface;
+- retains raw outputs, failed runs, branches, and deviations;
+- reports evidence without overstating interpretation;
+- stops without adjacent redesign or productization.
 
 Hard failures:
 
-- database, service, plugin system, generic registry, workflow engine, or compatibility layer without its activation condition;
-- duplicate parameter or configuration sources;
-- changed scientific behavior protected only by import, lint, or generic unit tests;
-- silent data repair or fallback that changes the scientific sample;
+- silently changing a frozen confirmatory statistic, population, control, or stop rule;
+- reporting a selected discovery branch as confirmatory evidence;
+- adding a database, service, plugin system, workflow engine, or compatibility layer without its activation condition;
+- duplicating parameter or configuration sources;
+- protecting changed scientific behavior only with import, lint, or generic tests;
 - leaving old and new execution routes active after simplification;
-- suppressing needed C2/C3 architecture despite real external obligations.
+- suppressing required C2/C3 architecture despite real external obligations.
 
-## Case 1 — Local process change
+## Case 1 — Confirmatory Probe Contract handoff
 
-**Request:** Add a Q10 temperature response to phytoplankton growth in an existing NPZD model.
+**Request:** Implement a frozen comparison between optimizer A and B with a specified toy problem, seed set, primary statistic, threshold, and stop rule.
 
-Expected decisions:
+Expected:
+
+- preserve every contract field;
+- use the smallest direct driver and raw result artifact;
+- run declared controls and checks;
+- return a confirmatory Evidence Record;
+- do not tune the problem, metric, or threshold after observing the outcome.
+
+## Case 2 — Discovery Probe Contract handoff
+
+**Request:** Explore an unexplained sign reversal using three specified candidate mechanisms and one allowed orthogonal branch.
+
+Expected:
+
+- implement the primary and allowed branch without constructing an experiment platform;
+- retain every branch, failed run, metric change, and selection criterion;
+- classify the Evidence Record as exploratory;
+- do not select a favorable branch and relabel it confirmatory.
+
+## Case 3 — Unresolved mechanism request
+
+**Request:** Determine whether an oscillation is physical or numerical and implement whatever is needed.
+
+Expected:
+
+- route inquiry design to `$scientific-probe` before substantial implementation;
+- do not invent a large simulation framework;
+- consume the resulting contract without duplicate planning.
+
+## Case 4 — Local process change
+
+**Request:** Add a specified Q10 temperature response to phytoplankton growth in an existing NPZD model.
+
+Expected:
 
 - edit the owning rate equation and authoritative parameter registry;
-- expose or preserve the temperature factor as a diagnostic when useful;
-- check the reference temperature, one warmer point, units, and an affected budget or short box run;
-- do not add a process plugin interface, model factory, or generalized environmental-response framework.
+- preserve or expose the relevant diagnostic;
+- check reference temperature, a warmer point, units, and an affected budget or short box run;
+- do not add a process plugin interface or generalized response framework.
 
-## Case 2 — One remote-sensing product
+## Case 5 — One remote-sensing product
 
-**Request:** Use one satellite chlorophyll product as a forcing or comparison dataset.
+**Request:** Use one named satellite chlorophyll product under specified quality, grid, and temporal rules.
 
-Expected decisions:
+Expected:
 
-- add one catalog entry or acquisition recipe and a thin explicit adapter;
-- preserve product version, quality flags, units, grid, time aggregation, and observation-operator assumptions;
+- add one catalog entry or acquisition recipe and thin explicit adapter;
+- preserve product version, flags, units, grid, aggregation, and observation operator;
 - exercise a real sample;
 - do not create a database, STAC API, ingestion service, or generic provider framework.
 
-## Case 3 — New 0D prototype
+## Case 6 — Defined 0D prototype
 
-**Request:** Prototype an NPZD box model to test whether grazing can generate oscillations.
+**Request:** Implement supplied NPZD box equations and run the predeclared grazing-oscillation probe.
 
-Expected decisions:
+Expected:
 
-- choose C0 or a compact C1 structure;
-- implement explicit states, rates, parameters, a driver, and a small output;
-- run a discriminating parameter case and inspect the budget;
-- do not scaffold a package, CLI, documentation site, CI matrix, or host-coupling layer.
+- use C0 or compact C1 structure;
+- implement explicit states, rates, parameters, driver, and raw output;
+- run the contract's discriminating case and budget check;
+- do not scaffold a package, CLI, docs site, CI matrix, or host-coupling layer.
 
-## Case 4 — Twenty tunable parameters
+## Case 7 — Calibration
 
-**Request:** Fit 20 BGC parameters against nutrients, chlorophyll, and oxygen observations.
+**Request:** Fit 20 BGC parameters against nutrients, chlorophyll, and oxygen under a defined objective and held-out design.
 
-Expected decisions:
+Expected:
 
-- make the objective decomposable by dataset or variable;
-- check bounds, transforms, fixed/tunable selection, and seeds;
-- screen sensitivity or identifiability before expensive joint optimization;
+- keep objective components inspectable;
+- verify bounds, transforms, fixed/tunable selection, and seeds;
+- screen sensitivity or identifiability when required by the contract;
 - preserve held-out regimes;
 - do not build an MLOps platform or claim one optimum uniquely identifies all parameters.
 
-## Case 5 — One new diagnostic
+## Case 8 — Second real host
 
-**Request:** Save particulate organic carbon export and remineralization diagnostics.
+**Request:** The same BGC core must now run in a 1D column and a regional circulation model.
 
-Expected decisions:
+Expected:
 
-- expose existing process terms from their owning equations;
-- add output variables with dimensions, units, coordinates, and provenance;
-- reopen and inspect the written output;
-- do not add a dashboard, reporting engine, database, or duplicate equation in plotting code.
-
-## Case 6 — Second real host model
-
-**Request:** The same BGC core now needs to run in both a 1D column model and a regional circulation model.
-
-Expected decisions:
-
-- recognize that a reusable boundary is now earned;
+- recognize that a reusable boundary is earned;
 - define the smallest state, forcing, tendency, flux, and diagnostic exchange contract;
-- consider a thin BMI/FABM-style adapter rather than duplicating the core;
+- consider a thin BMI/FABM-style adapter;
 - avoid importing unrelated features from a full coupling framework.
 
-## Case 7 — Large repeated ensemble
+## Case 9 — Large repeated ensemble
 
-**Request:** Run 10,000 ensemble members on HPC with partial recomputation after input changes.
+**Request:** Run 10,000 members on HPC with scheduler integration, restartability, and partial recomputation.
 
-Expected decisions:
+Expected:
 
-- recognize scheduler integration, dependencies, restartability, and partial recomputation as current requirements;
-- allow an existing workflow system such as Snakemake;
-- keep the scientific run command usable independently of the workflow engine;
+- recognize these as current requirements;
+- allow an existing workflow system;
+- keep the scientific run command usable independently;
 - record experiment and parameter identities without building an unrelated service platform.
 
-## Case 8 — Simplify overbuilt orchestration
+## Case 10 — Simplify overbuilt orchestration
 
-**Request:** A small study has loaders, repositories, factories, service classes, and three configuration layers around one model run. Simplify it without changing results.
+**Request:** A small study has loaders, repositories, factories, service classes, and three configuration layers around one run. Preserve the reported result and simplify it.
 
-Expected decisions:
+Expected:
 
-- freeze a representative result and trace the live scientific route;
-- collapse single-consumer seams into their actual owners;
+- capture a representative Evidence Record;
+- collapse single-consumer seams into their owners;
 - preserve one parameter source and one run path;
 - delete superseded code and compare scientific outputs;
-- do not rewrite the model or add a replacement framework.
+- do not replace the framework with another framework.
 
-## Case 9 — Sparse evidence for a rate
+## Case 11 — Genuine operational system
 
-**Request:** Implement a remineralization temperature dependence even though local evidence is sparse and literature values differ.
+**Request:** Turn an already validated model into a public forecast API with uptime, authentication, monitoring, and compatibility obligations.
 
-Expected decisions:
-
-- use the best current working form when the user wants implementation;
-- isolate the uncertainty in explicit parameters or experiment alternatives;
-- record source and rationale once;
-- select a discriminating sensitivity or regime comparison;
-- do not block on a systematic review or repeat generic cautions.
-
-## Case 10 — Genuine operational system
-
-**Request:** Turn the model into a public operational forecast API with uptime, authentication, and compatibility obligations.
-
-Expected decisions:
+Expected:
 
 - identify C3 and route to normal production architecture;
-- preserve the scientific core boundary while allowing service, security, monitoring, deployment, and compatibility work;
-- do not misuse minimalism to remove required operational controls.
+- preserve the scientific core boundary;
+- allow required service, security, deployment, monitoring, and compatibility work;
+- do not misuse minimalism to remove operational controls.
 
 ## Regression questions
 
-After revising the skill, test at least one C0, C1, C2, and C3 case. Compare against the prior version when possible:
+After revision, test at least one discovery handoff, confirmatory handoff, C0, C1, C2, C3, and negative-routing case.
 
-- Did the revision reduce an observed failure, or merely add more instructions?
-- Did it improve scientific traceability without increasing project ceremony?
+- Did the revision correct an observed failure or merely add instructions?
+- Did the second Skill consume the first handoff instead of duplicating it?
 - Does a small task remain small?
-- Can a real promotion trigger still activate mature infrastructure?
-
-Prefer a narrow correction supported by a failed case over accumulating universal rules.
+- Can discovery adapt without laundering selected results?
+- Can a real promotion trigger still earn mature infrastructure?
+- Are evidence and interpretation still separated?
