@@ -1,13 +1,13 @@
 # Coordination Architecture
 
-The two Skills form a staged research system, not two competing collections of generic “best practices.”
+The two bundled Skills form a staged research system, not two competing collections of generic “best practices.” When the separate `exploratory-science` Skill is installed, it owns broad frontier sensemaking before a bounded probe is frozen.
 
 ## Ownership
 
 | Concern | `scientific-probe` | `lean-scientific-computing` |
 |---|---|---|
-| Scientific question or discovery target | Owns | Consumes |
-| Candidate mechanisms or model classes | Generates and compares | Preserves |
+| Framed scientific target or bounded anomaly | Owns the current probe | Consumes |
+| Candidate mechanisms or model classes | Consumes and adds only missing challengers | Preserves |
 | Discriminating prediction or discovery signal | Owns | Implements |
 | Observable, statistic, branch rule, and decision rule | Owns | Preserves without silent changes |
 | Experimental controls | Specifies | Implements and verifies |
@@ -22,9 +22,9 @@ The two Skills form a staged research system, not two competing collections of g
 
 ### DISCOVERY
 
-Use when the hypothesis space is incomplete, observations are surprising, or the main task is to discover a useful mechanism or discriminator.
+Use when a scoped anomaly or search target exists but the current probe may need bounded adaptation.
 
-- Generate structurally different candidates, not wording variants.
+- Ensure the framed candidates are structurally different; add only a missing challenger needed for the bounded probe.
 - Challenge consequential soft assumptions.
 - Run one cheap primary probe and, when justified, one orthogonal or adversarial probe.
 - Allow adaptive branching, but log every branch and selection.
@@ -42,18 +42,22 @@ A Probe Contract freezes one probe. It does not prevent the wider research progr
 
 ## Routing state machine
 
-### State A — unresolved inference or discovery
+### Optional State 0 — open-ended exploration
 
-Use `scientific-probe` when the main uncertainty is scientific:
+When `exploratory-science` is installed, use it for broad hypothesis portfolios, conceptual-model development, and research-direction choice. It may pass a framed target, candidate set, or discriminator into State A. A quick reversible exploration may remain there without creating a separate contract.
+
+### State A — bounded inquiry design
+
+Use `scientific-probe` when one framed uncertainty is ready to become a bounded probe:
 
 - whether an effect exists;
-- which mechanism or model class explains an observation;
+- which of the framed mechanisms or model classes explains an observation;
 - whether a reported result replicates;
-- what unexpected pattern deserves follow-up;
+- how to probe a scoped unexpected pattern;
 - which observation would distinguish alternatives;
 - what a result justifies.
 
-The output is a **Probe Contract** with a declared mode.
+The output is a **Probe Contract** with a declared mode. Do not use this state to duplicate an open-ended hypothesis portfolio already owned by `exploratory-science`.
 
 ### State B — defined scientific computation
 
@@ -114,6 +118,8 @@ The handoff is not a project-management ceremony.
 - A C0 discovery run may use one scratch script and a compact exploration log.
 - Consequential stochastic or data-dependent work needs a fuller contract.
 - Do not generate a protocol document, issue backlog, or architecture plan unless the scientific or operational obligation requires it.
+- Defer file formats, abstractions, exhaustive edge cases, and secondary analyses that cannot change the current inference.
+- A local or regime-specific pattern may justify a reversible probe without justifying a universal claim; encode its scope instead of discarding it.
 
 ## Anti-loop rule
 

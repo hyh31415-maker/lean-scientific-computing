@@ -5,124 +5,57 @@ Read this reference when changing scientific inputs, preprocessing, equations, p
 The scientific spine is the shortest inspectable chain from source data and assumptions to evidence:
 
 ```text
-input catalog -> preprocessing -> state/forcing -> process model -> solver
-                                      ^                 |
-                                  parameters            v
-observations --------------------> objective <- diagnostics/output
-                                                        |
-                                                        v
-                                                Evidence Record
+input identity -> preprocessing -> state/forcing -> process model -> numerics
+                                        ^                 |
+                              resolved parameters          v
+observations -----------------------> objective <- diagnostics/output
+                                                          |
+                                                          v
+                                                   Evidence Record
 ```
 
-Keep one authoritative surface for each role. Do not duplicate scientific truth across loaders, configuration layers, model objects, notebooks, and reporting code.
+Give each scientific semantic one authoritative resolution chain, not necessarily one file. Base definitions, experiment overrides, and resolved run snapshots are legitimate layers when one resolver makes precedence visible. Avoid competing truths in loaders, model objects, notebooks, optimizer arrays, and reporting code.
 
-When a `scientific-probe` Probe Contract exists, the spine must preserve its sample definition, controls, primary observable, analysis rule, and required raw artifacts.
+When a Probe Contract exists, preserve its population, preprocessing, controls, primary observable, analysis or branch rule, and required raw artifacts along this spine.
 
-## Inputs and acquisition
+## Inputs and preprocessing
 
-Keep authoritative or raw inputs unchanged when practical. If a stable remote database is too large to copy, record an exact acquisition recipe rather than pretending a local copy is the source of truth.
+Keep authoritative inputs unchanged when practical. For remote or large data, record an exact acquisition recipe rather than treating a transient local copy as authoritative.
 
-A lightweight input catalog may be a small table or mapping with the relevant subset of:
+A small catalog needs only study-relevant identity: logical name, provider location, product/version, consumed variables and units, domain/time selection when not configured elsewhere, acquisition/preprocessing owner, stable revision or checksum, and reuse constraints. Do not duplicate authoritative metadata or store credentials.
 
-| Field | Purpose |
-|---|---|
-| `name` | Stable logical identifier used by the project |
-| `uri` or `path` | Provider location or project-relative location |
-| `product` and `version` | Dataset identity |
-| `variables` | Variables actually consumed |
-| `units` | Expected source units or unit mapping |
-| `spatial_extent` / `time_extent` | Selected domain |
-| `acquire` | Script, query, or retrieval method |
-| `preprocess` | Owning transformation entrypoint |
-| `checksum` or provider revision | Stable identity when available |
-| `source` / `license` | Provenance and reuse constraints |
+Separate transformations from raw inputs. Expose applicable choices: variables and coordinates; masks, flags, quality filtering, missingness, and detection limits; units and normalization; temporal aggregation/interpolation; reprojection, regridding, vertical conventions; and calibration/validation or train/test partitions.
 
-Do not require redundant fields. Do not store credentials, cookies, or tokens in the catalog.
+Avoid silent repair and broad fallback. A fallback that changes the scientific sample is more dangerous than a clear failure. Keep changed discovery branches visible; amend a confirmatory contract before using a sample-changing branch as confirmatory evidence.
 
-## Preprocessing
+## Scientific core and parameters
 
-Make sample-changing transformations reproducible and separate from raw inputs:
+Keep state, forcing, observations, parameters, process rates, tendencies, constraints, and diagnostics distinguishable. A reader should be able to trace each state change to its equation, parameters and units, numerical treatment, and inspectable intermediate quantities.
 
-- variable and coordinate selection;
-- masks, flags, quality filters, and missing-value handling;
-- unit conversion;
-- temporal aggregation or interpolation;
-- spatial reprojection, regridding, or vertical interpolation;
-- normalization, detection-limit treatment, or censoring;
-- calibration, train, validation, or comparison partitioning.
+Prefer pure or nearly pure process functions when compatible with the repository. Do not hide equations behind generic factories, registries, or serialization solely for configurability.
 
-Avoid silent repair and broad fallbacks. A fallback that changes the scientific population is more dangerous than a clear failure. A frozen DISCRIMINATION or REPLICATION contract must be amended explicitly before such a change is used as confirmatory evidence. In DISCOVERY, retain the original and changed branches in the exploration log.
-
-## Scientific core
-
-Keep state, forcing, parameters, process rates, tendencies, constraints, and diagnostics explicit. A reader should be able to answer:
-
-- Which variables are prognostic state, diagnostic state, forcing, or observations?
-- Which equation or process changes each state variable?
-- Which parameters control the process and in what units?
-- Which terms are transported, imposed, or numerically integrated?
-- Which intermediate quantities can be inspected after a run?
-
-Prefer pure or nearly pure process functions when compatible with the project. Do not hide equations behind generic factories, callback registries, or serialization machinery merely to make them configurable.
-
-## Parameter source of truth
-
-Use one authoritative registry in code or configuration. Include only fields the study uses, such as:
+Use only the parameter layers the study needs:
 
 ```text
-name, symbol, units, default, bounds, transform, tunable,
-process, source, rationale, prior
+parameter definition -> experiment override -> resolved run snapshot
 ```
 
-Do not maintain separate defaults in a class, YAML file, optimizer array, and notebook. Generate derived vectors or display tables from the authoritative registry.
+- **Definition:** semantics, units, reference/default value, bounds, transform, tunability, owner, source, and rationale as applicable.
+- **Override:** experiment-specific values without redefining semantics.
+- **Snapshot:** fully resolved values used for the result.
 
-## Objective and calibration
+Generate optimizer vectors and display tables from this chain. Do not copy defaults or bounds independently across code, configuration, arrays, and notebooks. Priors and literature values must come from the task, repository, or a verified source.
 
-Keep model equations independent from the optimizer unless an existing tested convention requires otherwise. Make these inspectable:
+## Result-specific paths and calibration
 
-- observation datasets and preprocessing;
-- simulated quantity matched to each observation;
-- residual, likelihood, or comparison statistic;
-- scaling, weighting, covariance, and detection-limit treatment;
-- parameter transforms and bounds;
-- fixed versus tunable parameters;
-- seed, initialization, or multi-start policy;
-- calibration and held-out regimes.
+Simulation, calibration, sensitivity, validation, and product generation are distinct results. Keep a thin authoritative entrypoint and configuration-resolution path for each result that exists. Share loaders, equations, parameter semantics, and output writers when they represent the same science; avoid both duplicated cores and one switch-heavy universal driver.
 
-An objective should expose interpretable components. A single opaque score hides trade-offs and dataset dominance. Do not change a confirmatory primary objective after inspecting the result without labeling the change exploratory. In DISCOVERY, keep every objective or anomaly-score branch and its selection rule.
+Keep process equations independent from the optimizer unless a tested project convention requires otherwise. Make applicable observation data and preprocessing, observation operator, residual or likelihood, scaling/weights/covariance, detection-limit treatment, parameter transforms/bounds, fixed/tunable selection, seed, initialization, and held-out regimes inspectable. Expose objective components by dataset or variable.
 
-## Diagnostics and outputs
+## Diagnostics, outputs, and handoff
 
-Save outputs with variable identity, units, dimensions, coordinates, and missing-value semantics. Prefer diagnostics computed by the scientific core over reimplementing equations in plotting or reporting code.
+Preserve variable identity, units, dimensions, coordinates, and missing-value semantics. Export diagnostics from their scientific owner instead of reimplementing equations downstream.
 
-For a substantive run, record the relevant subset of:
+For a substantive run, record the relevant code revision, input identity, experiment configuration, resolved parameters, objective, seed, numerics, output location/metadata, budget or residual summaries, run classification, failed runs, and contract deviations. Output attributes or a compact manifest are usually sufficient; do not build a tracking service without a current requirement.
 
-- code revision and dirty-tree status;
-- input identity, provider revision, or checksums;
-- experiment configuration and parameter snapshot;
-- objective or comparison definition;
-- random seed;
-- solver and tolerances;
-- raw output location and metadata;
-- scientific budgets, residuals, controls, and failures;
-- run classification and deviations from the Probe Contract;
-- complete exploratory branch and failed-run records when applicable.
-
-A compact machine-readable manifest or output attributes are normally enough. Do not build an experiment-tracking service without a current requirement.
-
-## Evidence Record handoff
-
-Report only facts needed for inference or reproducibility:
-
-- inquiry mode, run classification, and scientific target;
-- contract or implementation brief preserved;
-- declared deviations;
-- exact command or cell sequence;
-- input and preprocessing identity;
-- parameters, seed, solver, and tolerances when consequential;
-- raw artifact and exploration-log locations;
-- observed primary statistic, controls, diagnostics, budgets, and failures;
-- scientific checks actually run;
-- files changed and the scientific role of each.
-
-The Evidence Record is an audit aid, not automatically a new project artifact. It should be sufficient for `scientific-probe` to compare the result with the frozen decision rule without reconstructing implementation history.
+The Evidence Record is an audit aid, not automatically a project artifact. Keep it in the response unless durable output is requested, and include only what is needed to rerun or interpret the result.

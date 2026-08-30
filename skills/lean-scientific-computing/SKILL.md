@@ -1,6 +1,6 @@
 ---
 name: lean-scientific-computing
-description: Implement, run, verify, or simplify an already-defined researcher-controlled scientific computation through one traceable path from inputs and equations to outputs. Use for scientific scripts, simulations, calibration, diagnostics, data preparation, BGC or Earth-observation models, 科研代码、模型实现、科研仓库精简, and de-bloating research repositories. Preserve a scientific-probe Probe Contract and label discovery branches as exploratory. Do not use to choose hypotheses or interpret unresolved evidence; use scientific-probe first.
+description: Implement, run, or simplify researcher-controlled scientific computation when the scientific target is already defined. Use for scoped scripts, notebooks, simulations, calibration, ensembles, data preparation, BGC or Earth-observation models, and behavior-preserving repository simplification. Preserve any scientific-probe contract and keep inputs, equations, parameters, numerics, and outputs traceable. Do not use to choose hypotheses, interpret unresolved evidence, review, debug, visualize, manage workspaces, or design operational services.
 license: MIT
 metadata:
   author: hyh31415-maker
@@ -11,180 +11,80 @@ metadata:
 
 # Lean Scientific Computing
 
-## Mission
+## Outcome contract
 
-Deliver the smallest transparent implementation that produces trustworthy scientific evidence for the current task.
+Deliver the smallest transparent implementation that answers the current scientific task and preserves its meaning. Optimize for traceability, reproducibility, and researcher inspection—not minimum line count or imagined future users.
 
-Optimize for traceability, reproducibility, and ease of inspection by the researcher—not minimum line count, generic reuse, or imagined future users. Keep one direct path from authoritative inputs through preprocessing, equations, parameters, solver or calibration, diagnostics, and outputs.
+Keep one authoritative execution and configuration-resolution path per distinct result. Simulation, calibration, sensitivity, and validation may have separate thin entrypoints; they must share scientific definitions rather than duplicate them.
 
-## Scope and routing
+Match the requested depth. Omit generic cautions, project ceremony, and exhaustive edge-case machinery.
 
-Use this Skill when the scientific target is sufficiently defined and the remaining work is computational:
+## Boundary and handoff
 
-- implement a specified equation, parameterization, objective, or diagnostic;
-- prepare a defined dataset or observation operator;
-- run a planned confirmatory test, discovery branch, simulation, calibration, comparison, or ensemble;
-- verify scientific behavior with meaningful checks;
-- simplify an overengineered research repository while preserving declared evidence.
+Use this Skill when the scientific behavior or probe is already specified and the remaining work is implementation, execution, scientific checking, or scoped simplification.
 
-Use `$scientific-probe` first when the primary question is whether an effect exists, which mechanism explains it, what unexpected result to pursue, what observation would distinguish alternatives, what replication should count as, or what the evidence justifies.
-
-For mixed work, follow one sequence:
+If the main work is broad hypothesis formation or research-direction choice, keep it in the exploratory-science workflow when available. If a framed target needs a frozen discriminator, replication rule, or bounded anomaly probe, use `$scientific-probe` first. For mixed work, use one sequence:
 
 ```text
 Probe Contract -> lean implementation -> Evidence Record -> scientific interpretation
 ```
 
-Do not emit a second independent research plan or repeatedly hand off for local reversible details. If `$scientific-probe` is unavailable, preserve the same contract boundary locally.
+Do not emit a second research plan or bounce between Skills for local reversible details. If the sibling Skill is unavailable, preserve the same boundary locally.
 
-## Accept the scientific contract
+When a Probe Contract exists, preserve its mode, target, population, sample-changing preprocessing, controls, primary observable, analysis or branch rule, seed policy when consequential, stop rule, and required raw artifacts. Confirmatory fields must not change silently after results are seen. Discovery branches may adapt only when retained and labeled exploratory.
 
-### When a Probe Contract exists
-
-Treat it as the experiment specification. Preserve:
-
-- mode and scientific target;
-- current alternatives and discriminating prediction or discovery signal;
-- population, exclusions, and sample-changing preprocessing;
-- controls;
-- primary observable or statistic;
-- analysis, decision, branch, and stop rules;
-- seed or initialization policy when consequential;
-- required raw artifacts and provenance.
-
-Mode-specific handling:
-
-- **DISCRIMINATION / REPLICATION:** do not silently optimize, broaden, or improve frozen fields after seeing the result.
-- **DISCOVERY:** implement bounded adaptive branches when the contract allows them; retain every branch, failed attempt, metric change, and selection rule; classify all such runs as exploratory.
-
-If implementation reality makes a field impossible or invalid, declare the smallest necessary deviation before the affected run when possible. Do not silently substitute a new scientific question. A changed confirmatory rule requires a new contract before it can support confirmatory evidence.
-
-### When no Probe Contract is needed
-
-For an already specified deterministic implementation, form a compact internal brief:
+For an already specified local change, use a compact internal brief instead of manufacturing a contract:
 
 ```text
-Requested scientific behavior:
-Scientific surface touched:
-Representative case:
-Scientific checks:
-Stop condition:
+requested behavior | touched scientific surface | representative case | checks | stop condition
 ```
 
-Do not manufacture hypotheses, thresholds, or ceremony for a local change.
+## Core decision loop
 
-## Core loop
+1. **Inspect the existing route.** Locate authoritative inputs, preprocessing, equations, parameter resolution, execution entrypoint, and reported outputs before editing.
+2. **Choose the lowest adequate level.** Preserve repository conventions. A stated prototype is normally C0; use C1 when a result must be rerun, compared, cited, shared, or defended. A new project alone does not earn C1.
+3. **Bound the edit.** Modify the requested surface, direct consumers, and result-protecting checks. Do not inspect or clean unrelated architecture.
+4. **Apply the complexity gate.** Require a present scientific or operational obligation before adding permanent machinery.
+5. **Implement one direct route.** Prefer explicit functions, data, parameter resolution, and thin result drivers with obvious scientific ownership.
+6. **Exercise proportional reality.** Use the smallest representative data and shortest non-empty run that can expose a wrong result. Full production data, paid resources, remote scheduling, long optimization, or large ensembles require an explicit current-task request.
+7. **Verify the scientific consequence and stop.** Remove only paths made unused by this change; report what changed and what actually ran.
 
-1. **Inspect the existing route.** Find authoritative inputs, preprocessing, equations, parameter source, execution entry, and reported outputs before editing.
-2. **Infer project maturity.** Use C0–C3 from [references/project-levels-and-complexity.md](references/project-levels-and-complexity.md). Research phase and project maturity are independent.
-3. **Name the scientific surface.** Limit work to the smallest affected surface and direct consumers: input, preprocessing, scientific core, parameter/objective, solver/calibration, diagnostics/output, or infrastructure.
-4. **Bound the edit.** Do not turn a local scientific change into a repository redesign.
-5. **Apply the complexity gate.** Require a present scientific or operational obligation for every permanent mechanism.
-6. **Implement one direct route.** Prefer explicit functions, data structures, and experiment drivers whose scientific ownership is obvious.
-7. **Exercise representative reality early.** Run one real or faithful input through the changed path before generalized machinery.
-8. **Verify the scientific consequence.** Choose checks capable of revealing a wrong scientific result or contract drift.
-9. **Produce the Evidence Record.** Return observations, failures, branches, and artifacts without overstating meaning.
-10. **Simplify and stop.** Remove superseded paths and avoid adjacent cleanup or productization.
-
-Read [references/scientific-spine.md](references/scientific-spine.md) when changing inputs, preprocessing, equations, parameters, objectives, calibration, provenance, diagnostics, or outputs. Read [references/scientific-verification.md](references/scientific-verification.md) when selecting checks. Read [references/project-levels-and-complexity.md](references/project-levels-and-complexity.md) when creating, restructuring, simplifying, or promoting a project. For oceanography, aquatic biogeochemistry, remote sensing, microbial processes, or organic carbon, also read [references/ocean-bgc-and-earth-observation.md](references/ocean-bgc-and-earth-observation.md).
+Read [references/project-levels-and-complexity.md](references/project-levels-and-complexity.md) for project creation, restructuring, simplification, or new permanent machinery. Read [references/scientific-spine.md](references/scientific-spine.md) for inputs, equations, parameters, objectives, calibration, provenance, or outputs. Read [references/scientific-verification.md](references/scientific-verification.md) when selecting checks or changing numerics, calibration, outputs, or performance. For oceanography, BGC, remote sensing, microbial processes, or organic carbon, also read [references/ocean-bgc-and-earth-observation.md](references/ocean-bgc-and-earth-observation.md). Read [references/behavioral-evals.md](references/behavioral-evals.md) only when revising or evaluating this Skill.
 
 ## Complexity gate
 
-Before adding a dependency, top-level directory, generic interface, registry, plugin system, database, workflow engine, compatibility layer, service, second control path, or broad test hierarchy, ask:
+Add a permanent dependency, directory, abstraction, registry, data store, workflow system, compatibility layer, service, or second control path only when every applicable condition holds:
 
-1. Which current scientific or operational requirement does it own?
-2. Why cannot a local function, file, table, or configuration satisfy that requirement clearly?
-3. Does it reduce total concepts or expose scientific meaning rather than relocate complexity?
-4. For a generic abstraction, are there already two real variants or consumers, or one fixed external contract?
-5. If the assumption is wrong, can the mechanism be removed cleanly?
+1. A current requirement, observed failure, or measured bottleneck exists.
+2. A simpler local function, file, table, or configuration is insufficient.
+3. The mechanism reduces total concepts, duplication, or hidden scientific meaning rather than relocating complexity.
+4. A generic abstraction has real consumers or variants, or one fixed external contract.
+5. The decision has a clear removal or reversal path if its assumption fails.
 
-The first three must support the addition; apply the fourth to generic abstractions. Otherwise keep the solution local.
+Apply item 4 only to generic abstractions. Do not add future-facing flags, placeholders, backlogs, or design documents. C2/C3 obligations may legitimately earn mature engineering; minimalism must not hide them.
 
-C2 or C3 obligations can legitimately earn packaging, interfaces, orchestration, services, security, monitoring, and compatibility work. Minimalism must not hide real obligations.
+## Scientific uncertainty and invariants
 
-## Scientific code preferences
+Continue with a working assumption when the user, repository, Probe Contract, or a verified source specifies or reasonably implies it. Record it once in the owning equation, parameter definition, or experiment configuration.
 
-- Keep raw or authoritative inputs unchanged; make transformations reproducible and visible.
+Do not silently choose alternatives that could change the conclusion, including rate or temperature-response forms, dimensions or scaling, observation operators, objective weights, priors, and open or closed boundaries. When cheap, encode explicit experiment alternatives; otherwise pause only the affected branch and report the choice required.
+
+- Keep authoritative inputs unchanged and preprocessing reproducible.
+- Use one resolution chain per scientific semantic. Base definitions, experiment overrides, and resolved run snapshots are valid layers when one resolver owns precedence.
+- Keep equations and process rates inspectable; keep calibration outside them when practical; expose diagnostics from their scientific owner.
 - Fail visibly rather than apply a fallback that changes the scientific population, units, equation, or objective.
-- Maintain one authoritative source for parameter values, units, bounds, transforms, and tunability.
-- Keep equations and process rates inspectable; do not bury them in factories or serialization glue.
-- Keep calibration and objectives explicit and decomposable.
-- Expose meaningful intermediate rates, fluxes, residuals, and budgets from their owning computation.
-- Prefer a direct call or thin adapter until a second real host or fixed external contract earns an interface.
-- Do not reorganize a repository merely to match an example layout.
-- Allow limited explicit duplication when abstraction would hide causal or scientific ownership.
-- Keep exploratory branches in a scratch area or explicit run table; do not build a permanent experiment platform for one search.
+- Treat databases, workflow engines, coupling standards, and services as earned escalation options, never as default scaffolding.
 
-## Verification
+## Verification and Evidence Record
 
-Select the smallest checks that can falsify the changed scientific meaning or reveal contract drift:
+Use the fewest checks capable of falsifying the changed scientific meaning or exposing contract drift. Generic imports, lint, type checks, or coverage do not replace formula, unit, limit, budget, representative-run, leakage, objective, sensitivity, or output-reopen checks when those are relevant.
 
-- representative real or faithful inputs;
-- units, dimensions, ranges, missingness, and sample identity;
-- known values and limiting behavior;
-- sign, monotonicity, continuity, or thresholds;
-- conservation or elemental budgets;
-- deterministic toy or box runs;
-- leakage-resistant splits;
-- objective decomposition and parameter ordering;
-- seed, tolerance, resolution, or initialization sensitivity when consequential;
-- reopening saved output and checking metadata;
-- confirming that all exploratory branches and failed runs were retained.
+Keep claims distinct: **verification** concerns declared equations and numerics; **validation** concerns independent observations; **calibration diagnostics** concern inference behavior. One does not prove the others.
 
-Generic imports, lint, type checks, or coverage do not replace these checks. State exactly what ran. Never report skipped, empty, synthetic-only, partial, or setup-only work as stronger evidence than it is.
-
-## Simplifying an overengineered research repository
-
-Repository simplification belongs here.
-
-1. Freeze the scientific result or Evidence Record that must survive.
-2. Trace the shortest live dependency chain from authoritative inputs and assumptions to that result.
-3. Classify surrounding components as scientific core, reproducibility support, currently earned engineering, removable overhead, or unknown.
-4. Collapse one unearned seam at a time.
-5. Delete superseded routes in the same change; do not leave parallel loaders, parameter sources, run paths, or configuration owners.
-6. Re-run the scientific comparison within an explicit tolerance.
-7. Prefer deletion and consolidation over replacement-framework rewrites.
-
-Do not remove provenance, raw outputs, unit conversion, randomization, blinding, numerical stability controls, exploration logs, or scientific checks merely because they are verbose.
-
-## Evidence Record
-
-For substantive work, return:
-
-```text
-Mode and scientific target:
-Run classification: confirmatory / exploratory / feasibility-only / invalid
-Contract or implementation brief preserved:
-Declared deviations:
-Commands or cell sequence actually run:
-Code revision and relevant environment:
-Input identity, population, preprocessing, and provenance:
-Seeds, initialization, solver, or tolerances when relevant:
-Raw artifact and exploration-log locations:
-[observed] Primary outputs, controls, branches, and failed runs:
-Scientific checks and failures:
-Files changed and the scientific role of each:
-Engineering added and the current requirement that earned it:
-Engineering deliberately omitted:
-Stop condition reached:
-```
-
-Keep interpretation bounded. Report direct observations and implementation-dependent facts. When the user asks what the result means, pass this record back to `$scientific-probe` or apply its evidence discipline explicitly.
-
-For a small deterministic task, answer directly without forcing the full template.
+For substantive work, return a compact Evidence Record containing the relevant contract or implementation brief, declared deviations, commands or cells actually run, input identity and preprocessing, parameters/seeds/numerics when consequential, raw artifacts and branch logs, observed outputs and failed runs, scientific checks, files changed, and the stop condition reached. Label the run `confirmatory`, `exploratory`, `feasibility-only`, or `invalid`. Small deterministic tasks may be reported directly.
 
 ## Completion
 
-Completion means:
+Completion means the requested behavior works, frozen scientific meaning was preserved or deviations were declared, relevant checks ran or failures were reported, one authoritative route remains, and no additional structure is required by the current obligation.
 
-- the requested scientific behavior works;
-- the mode-appropriate contract or implementation brief was preserved or deviations were declared;
-- exploratory branches remain complete and labeled;
-- relevant scientific checks passed or failures were reported;
-- the authoritative route is easier, not harder, to trace;
-- superseded mechanisms are gone;
-- no additional structure is required for the current obligation.
-
-Stop without unsolicited refactoring, packaging, performance tuning, dashboards, APIs, or product documentation.
-
-Read [references/behavioral-evals.md](references/behavioral-evals.md) only when revising or evaluating this Skill.
+Stop without unsolicited refactoring, packaging, performance tuning, dashboards, APIs, broad sweeps, or product documentation.

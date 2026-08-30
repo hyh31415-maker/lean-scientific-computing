@@ -1,6 +1,6 @@
 ---
 name: scientific-probe
-description: Frame unresolved scientific questions and design or interpret evidence that can change the answer. Use for mechanism discovery, competing hypotheses, effect existence, replication criteria, anomaly diagnosis, causal discrimination, or choosing the next experiment; also for 科学问题、机制、假说、复现、证伪、判别实验. Select DISCOVERY, DISCRIMINATION, or REPLICATION mode, produce a compact Probe Contract, and hand non-trivial computation to lean-scientific-computing. Do not use for already-specified implementation, repository simplification, generic literature summaries, or product delivery.
+description: Specify and interpret one bounded scientific probe after the target, anomaly, alternatives, or replication claim is sufficiently framed. Use for preregistering a discriminating comparison, defining replication success or failure, freezing analysis and stop rules, designing a scoped anomaly probe, or interpreting an Evidence Record; also for 判别实验、复现标准、探针合同、证伪规则. Select DISCOVERY, DISCRIMINATION, or REPLICATION mode. Do not use for broad open-ended sensemaking or research-direction exploration, already-defined implementation, repository simplification, generic literature summaries, or product delivery.
 license: MIT
 metadata:
   author: hyh31415-maker
@@ -11,212 +11,115 @@ metadata:
 
 # Scientific Probe
 
-## Mission
+## Outcome contract
 
-Reduce scientific uncertainty without collapsing prematurely onto the safest familiar explanation.
+Reduce the uncertainty that matters for the current scientific decision without collapsing onto the safest familiar explanation or waiting for universal proof.
 
-Explore broadly enough to expose consequential alternatives, then constrain claims to the evidence actually produced. Code may serve as experimental apparatus, but software completion is never the scientific result.
+Sparse, noisy, indirect, or local evidence may justify a scoped working hypothesis and a reversible next probe. It does not justify a stronger claim than its domain, assumptions, and measurement support. Evidence sufficiency is decision-relative: require enough to change the next scientific action, not enough to settle the field.
 
-A Probe Contract freezes one probe, not the entire research program. New evidence may justify a new branch and a new contract.
+Freeze only the choices that affect the current inference. Record or defer non-blocking design questions; stop only when an unresolved choice would change this probe, violate a hard constraint, or make its result uninterpretable.
 
-## Scope and routing
+## Boundary and handoff
 
-Use this Skill when the primary unresolved work is epistemic:
+Use this Skill when a bounded scientific target is ready to become one operational probe: define what would count, freeze inference-relevant choices, preserve them through execution, and interpret the returned evidence.
 
-- determine whether an effect exists;
-- discover or compare mechanisms, explanations, causal stories, or model classes;
-- diagnose a surprising observation or disagreement;
-- define what would count as replication or failed replication;
-- identify a discriminating observation, intervention, statistic, counterexample, or limiting case;
-- interpret evidence and choose the next scientific action.
+When `$exploratory-science` is installed, it owns broad frontier sensemaking, hypothesis portfolios, conceptual-model development, and research-direction choice under sparse evidence. It may pass a scoped anomaly, candidate set, or discriminator here when a durable or consequential Probe Contract is useful. Do not invoke both Skills for a quick reversible question. If no broader exploration workflow is available, perform only the minimum candidate expansion needed to make the bounded probe meaningful.
 
-Use `$lean-scientific-computing` when the target computation is already defined and the remaining work is implementation, data preparation, simulation, calibration plumbing, diagnostics, scientific verification, or repository simplification.
+Use `$lean-scientific-computing` when the target computation is defined and the remaining work is data preparation, implementation, simulation, calibration, diagnostics, scientific verification, or repository simplification.
 
 For mixed work, use one sequence:
 
 ```text
-$scientific-probe -> Probe Contract -> $lean-scientific-computing
--> Evidence Record -> $scientific-probe
+scientific-probe -> Probe Contract -> lean-scientific-computing
+-> Evidence Record -> scientific-probe
 ```
 
-Do not design a product system in parallel with an unresolved probe unless a product constraint materially changes the scientific test. If the sibling Skill is unavailable, preserve the same boundary locally rather than blocking.
+Handoff only when ownership changes. A trivial calculation may stay here; local coding details may stay with the implementation Skill. If the sibling Skill is unavailable, preserve the boundary locally rather than blocking.
 
-## Select the inquiry mode
+## Choose the inquiry mode
 
-Choose the mode before designing the probe. State it only when it affects the workflow.
+| Mode | Use when | What is fixed |
+|---|---|---|
+| **DISCOVERY** | A scoped anomaly or search target exists, but the current probe may need bounded adaptation | The current probe mechanics and evidence capture; adaptive branches are logged and remain exploratory |
+| **DISCRIMINATION** | Credible alternatives make different predictions | Primary discriminator, analysis rule, decision rule, and stop rule before outcome inspection |
+| **REPLICATION** | An existing reported claim is being rerun | Population, exclusions, sample-changing preprocessing, primary statistic, success/failure rule, and stop rule before rerun |
 
-### DISCOVERY
+A Probe Contract freezes one probe, not the research program. Changing mode or promoting an exploratory result to confirmatory use requires a new contract.
 
-Use when the hypothesis space is incomplete, an observation is surprising, or the purpose is to find a useful mechanism or discriminator.
-
-- Surface consequential hidden assumptions.
-- Generate structurally different candidates, not paraphrases.
-- Include a non-default explanation when it is mechanistically coherent, not merely contrarian.
-- Permit bounded adaptive branches and anomaly-driven iteration.
-- Log every branch, changed metric, and selection criterion.
-- Report discoveries as exploratory; do not upgrade a selected branch into confirmatory evidence.
-
-### DISCRIMINATION
-
-Use when credible alternatives already exist and make different predictions. Freeze the primary discriminator, analysis rule, decision rule, and stop rule before inspecting the outcome.
-
-### REPLICATION
-
-Use when testing an existing reported result. Freeze the population, exclusions, sample-changing preprocessing, primary statistic, success/failure rule, and stop rule before rerunning it.
-
-Changing mode requires a new Probe Contract. A discovery result may motivate a later discrimination or replication test, but it does not retroactively become one.
-
-## Evidence discipline
-
-- Never invent data, execution, citations, measurements, or successful reproduction.
-- Distinguish observed facts from assumptions, derivations, model-dependent results, exploratory findings, and speculation.
-- Do not treat reproducing a pattern in a simulation as proof that the simulated mechanism caused the real observation.
-- Do not hide failed runs, control failures, exclusions, branches, or contract deviations.
-- Treat safety, privacy, data integrity, mathematical definitions, and explicit user constraints as hard constraints.
-- Treat prevailing interpretations, existing architecture, preferred libraries, and imagined future reuse as challengeable assumptions.
-
-## Workflow
+## Core loop
 
 ### 1. Name the scientific target
 
-For DISCRIMINATION or REPLICATION, state the decision or belief that could change.
+State the decision, anomaly, unexplained regularity, or search target. In DISCOVERY, progress may be a predictive mechanism, a localized failed assumption, or a better discriminator. Do not substitute a software deliverable for the target.
 
-For DISCOVERY, state the anomaly, unexplained regularity, or search target and what would count as progress: a new predictive mechanism, a localized failure assumption, or a stronger discriminator.
+### 2. Diverge enough to avoid tunnel vision
 
-Do not begin with a software deliverable. “Build a pipeline” is not a scientific target.
+Start from the framed candidates. Add only the smallest missing alternative needed to avoid one-hypothesis confirmation. Challenge consequential soft assumptions and include a non-default candidate only when it has a coherent mechanism and a distinct consequence.
 
-### 2. Diverge, then compress
+For each candidate, identify its defining mechanism or assumption, prediction under the planned conditions, evidence that would weaken it, and important assumptions shared with competitors. Group candidates that are observationally equivalent under the current probe.
 
-Generate the smallest adequate set of materially different candidates, usually two to five. In DISCOVERY, first challenge the most consequential assumptions before selecting leading candidates.
-
-For each candidate, state:
-
-- mechanism or defining assumption;
-- prediction under the proposed conditions;
-- observation that would weaken it;
-- assumptions shared with competitors.
-
-Group candidates that make the same observable prediction under the current probe. Do not force every problem into binary `H0`/`H1`, and do not add novelty that has no distinct testable consequence.
+Do not turn this bounded step into a broad research-direction exercise, force an immature problem into binary hypotheses, or generate decorative novelty.
 
 ### 3. Find a real discriminator
 
-Prefer an observable on which credible candidates predict different directions, scales, shapes, timings, responses, or budget signatures.
+Prefer an observation, intervention, statistic, limiting case, counterexample, direction, scale, shape, timing, or budget signature on which credible candidates differ.
 
-Check:
+Check only what can change interpretability: expected effect versus measurement or numerical resolution; apparatus or positive controls; confounding, leakage, and sample-changing preprocessing; model or observation-operator dependence; and simpler cases that could settle the issue.
 
-- expected effect scale versus measurement resolution, sample size, or numerical tolerance;
-- controls needed to distinguish a null result from apparatus failure;
-- confounders, leakage, or preprocessing choices that can mimic the signal;
-- whether the result depends on a simulation model or observation operator;
-- whether a simpler counterexample or limiting case settles the issue.
-
-If all candidates predict the same outcome, redesign the probe rather than collecting non-discriminating evidence.
+If the candidates predict the same observable, redesign the probe rather than scaling a non-discriminating sweep.
 
 ### 4. Choose the minimum sufficient probe
 
-Optimize expected information gain against implementation, compute, data-acquisition, and interpretive cost.
+Balance expected information gain against implementation, compute, data-acquisition, and interpretive cost. Prefer a hand calculation before a simulation, a synthetic control before real-data scale-up, a box model before a spatial host when the uncertainty is local, and one primary statistic before a dashboard.
 
-Prefer, when valid:
-
-- a hand calculation or limiting case before a large simulation;
-- a synthetic or apparatus control before real-data scale-up;
-- a box or 0D model before a spatial host when uncertainty is local;
-- one primary statistic before a dashboard of metrics;
-- one representative condition plus decisive controls before a broad sweep.
-
-In DISCOVERY, add at most one orthogonal or adversarial probe when it materially protects against a blind spot. A cheap probe is not sufficient if it lacks the power, resolution, or measurement validity needed to change the scientific state.
+Small is not automatically sufficient: increase only the dimension needed for power, resolution, measurement validity, or a decisive control. In DISCOVERY, add at most one orthogonal or adversarial probe when it materially protects against a blind spot.
 
 ### 5. Freeze a proportional Probe Contract
 
-Before inspecting the outcome, record the relevant fields:
+Keep the default contract to one screen:
 
 ```text
-Mode:
-Question, decision, or discovery target:
+Mode and scientific target:
 Current alternatives or search space:
-Scope and shared assumptions:
+Scope and consequential shared assumptions:
 Discriminating prediction or discovery signal:
 Probe and controls:
-Primary observable or statistic:
-Analysis rule:
-Decision or branch rule:
-Stop rule:
-Required raw artifacts and provenance:
+Primary observable and analysis rule:
+Decision or branch rule and stop rule:
+Required raw evidence and provenance:
 Implementation ceiling:
 ```
 
-Keep this to one screen by default. A simple calculation may need only a few lines. Use [references/probe-contract.md](references/probe-contract.md) for consequential, stochastic, data-dependent, expensive, or multi-stage work.
+Use [references/probe-contract.md](references/probe-contract.md) only for consequential, stochastic, data-dependent, expensive, multi-stage, or post-result-flexible work.
 
-For DISCRIMINATION and REPLICATION, do not silently revise the population, exclusions, preprocessing, primary statistic, threshold, controls, seed policy, or stop rule after seeing the outcome.
+Confirmatory rules must not be revised silently after the outcome. DISCOVERY may branch, but every failed attempt, changed metric, selection rule, and retained result remains visible and exploratory.
 
-For DISCOVERY, freeze the mechanics and evidence-capture rules of the current probe while allowing logged branches. Post-result choices remain exploratory and need a new contract before confirmatory use.
+### 6. Execute, interpret, and stop
 
-### 6. Execute or hand off
+Execute a trivial probe directly or hand non-trivial repository work to `$lean-scientific-computing`. Set only the implementation ceiling needed to prevent premature productization; do not prescribe architecture without a scientific requirement.
 
-A trivial scratch calculation may be executed directly.
-
-When the probe requires repository changes, durable data handling, model implementation, calibration, or non-trivial execution, hand the Probe Contract to `$lean-scientific-computing`. That Skill owns structure and scientific verification; this Skill retains ownership of the question, mode, and interpretation.
-
-Set only an implementation ceiling needed to prevent premature productization. Do not prescribe factories, directory layouts, services, or generic interfaces without a scientific requirement.
-
-### 7. Apply the surprise protocol
-
-If a control fails, the measurement cannot resolve the discriminator, or the observation is incompatible with all current candidates:
-
-1. mark the current probe `invalid` or `unresolved`;
-2. preserve the unexpected evidence;
-3. reopen the smallest assumption set capable of explaining the discrepancy;
-4. generate a new exploratory contract.
-
-Do not patch the old threshold, metric, model, or sample until it appears successful.
-
-### 8. Interpret the Evidence Record
-
-Compare the result with the mode-appropriate rule.
-
-For DISCRIMINATION or REPLICATION, report:
+Interpret the Evidence Record with explicit labels:
 
 ```text
-Status: supports / weakens / incompatible under assumptions / unresolved / invalid probe
+[observed] [derived] [model-dependent] [exploratory] [speculation]
 ```
 
-For DISCOVERY, report:
+For DISCRIMINATION or REPLICATION, report `supports`, `weakens`, `incompatible under assumptions`, `unresolved`, or `invalid probe`. For DISCOVERY, report `candidate generated`, `anomaly localized`, `discriminator improved`, `unresolved`, or `invalid probe`.
 
-```text
-Status: candidate generated / anomaly localized / discriminator improved / unresolved / invalid probe
-```
+If controls fail, the measurement cannot resolve the discriminator, or all current candidates miss the observation, preserve the surprise, mark the probe unresolved or invalid, reopen the smallest relevant assumption set, and create a new exploratory contract. Do not repair the old rule until it looks favorable.
 
-Use evidence labels:
+Stop when the current decision is possible, discovery has advanced enough to define the next probe, or the probe is invalid. Name at most one next probe unless the user asks for a research program. Do not continue into unsolicited refactoring, platforms, dashboards, broad sweeps, or literature expansion.
 
-```text
-[observed] Direct outputs or supplied facts
-[derived] Consequences following from stated assumptions
-[model-dependent] Conclusions conditional on a model or observation operator
-[exploratory] Findings selected or changed after outcome inspection
-[speculation] Plausible but currently untested ideas
-```
+## Evidence discipline
 
-State contract deviations and what the evidence does not establish. “Supports” means a relative belief update, not proof.
+- Never invent data, execution, citations, measurements, or replication.
+- Separate supplied or observed facts from assumptions, derivations, model-dependent results, exploratory selection, and speculation.
+- A simulated pattern does not prove that the modeled mechanism caused the real observation.
+- Keep failed runs, control failures, exclusions, branches, and contract deviations visible.
+- Treat safety, privacy, data integrity, mathematical definitions, and explicit user constraints as hard constraints. Treat prevailing interpretations, preferred libraries, existing architecture, and imagined reuse as challengeable assumptions.
 
-### 9. Stop deliberately
+Read [references/failure-modes.md](references/failure-modes.md) when safe-answer collapse, premature formalization, post-result analysis, simulation-to-reality claims, leakage, evidence paralysis, or repeated metric changes are live risks. Read files under `evals/` only when revising or evaluating this Skill.
 
-Stop when the declared decision is possible, the discovery target has advanced enough to define the next probe, or the current probe is shown invalid.
+## Completion
 
-Do not continue with unsolicited refactoring, packaging, optimization, dashboards, APIs, broad parameter sweeps, or literature expansion. Name at most one next probe unless the user explicitly requests a research program.
-
-## Failure modes and completion
-
-Read [references/failure-modes.md](references/failure-modes.md) for ambiguous hypotheses, premature formalization, post-result analysis, simulation-to-reality claims, leakage, or repeated metric changes.
-
-Before finishing, verify:
-
-- the selected mode matches the epistemic state;
-- the candidates are materially distinct and testable;
-- the observable can discriminate or discover something useful;
-- confirmatory rules predate the outcome;
-- exploratory branches remain visibly exploratory;
-- evidence labels match what actually occurred;
-- no engineering milestone is being used as scientific evidence;
-- the work stopped at the first sufficient result.
-
-Read files under `evals/` only when revising or evaluating this Skill.
+Finish when the mode matches the epistemic state, candidates are distinct enough, the probe can change the next scientific action, frozen and adaptive choices are labeled correctly, claims match the evidence, and the work has stopped at the first sufficient result.

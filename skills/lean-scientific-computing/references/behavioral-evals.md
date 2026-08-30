@@ -1,160 +1,136 @@
-# Behavioral Evaluations
+# Behavioral Evaluation Protocol
 
-Read this file only when creating, revising, or evaluating `lean-scientific-computing`. Evaluate observable decisions, diffs, commands, and Evidence Records—not exact headings.
+Read this file only when creating, revising, or evaluating `lean-scientific-computing`. Evaluate observable routing, decisions, diffs, commands, artifacts, and Evidence Records—not wording or heading similarity.
+
+## Current evidence status
+
+This is an evaluation specification, not a claim that behavioral comparisons have passed. Do not call the Skill validated until reproducible run records and artifacts exist.
+
+## Make each case executable
+
+Freeze before running:
+
+- fixture repository and exact commit or content hash;
+- user prompt, starting files, allowed paths, and protected paths;
+- Skill commit and comparison condition;
+- model, reasoning setting, host version, and tool permissions;
+- permitted commands and execution-cost limits;
+- scientific invariant, Probe Contract when present, and observable architecture boundary.
+
+Run each condition from an identical isolated copy. Preserve transcript, final status, diff, commands and outputs, result artifacts, and reviewer decision. A prose recollection is not a run record.
+
+Useful comparison conditions are:
+
+1. the same prompt with this Skill disabled;
+2. the same ordinary prompt with implicit selection enabled;
+3. explicit `$lean-scientific-computing` invocation or the previous Skill revision.
+
+Keep model, reasoning, fixture, permissions, and prompt constant. Otherwise label the comparison exploratory.
+
+## Measures
+
+Record at least:
+
+- modified, added, deleted, and protected files;
+- lines changed, top-level directories, dependencies, abstractions, configuration owners, and entrypoints added or removed;
+- whether a non-empty representative scientific path ran;
+- scientific result delta, numerical tolerance, and performance delta when applicable;
+- verification, validation, calibration, and interpretation claims;
+- contract deviations, exploratory branches, failed runs, silent assumptions, unrequested expensive execution, and unfinished control paths.
+
+Machine diff measures identify review targets; they are not quality scores. Do not reward fewer lines when clarity or a real obligation requires structure. Add a deterministic checker only after a repeated failure can be expressed reliably.
 
 ## Global pass conditions
 
-- accepts and preserves a `$scientific-probe` Probe Contract when present;
-- applies different integrity rules to DISCOVERY versus DISCRIMINATION or REPLICATION;
-- does not reopen hypothesis selection for an already specified implementation;
-- leaves one direct scientific control path;
+- selects this Skill only when the scientific target is sufficiently defined;
+- consumes a `scientific-probe` Probe Contract without restarting inquiry design;
+- applies confirmatory locks differently from logged DISCOVERY branches;
+- stays on the named scientific surface and preserves unrelated project structure;
+- leaves one authoritative execution and configuration-resolution path per distinct result;
 - gives every permanent mechanism a current requirement;
-- keeps inputs, formulas, parameters, objectives, and outputs traceable;
-- runs non-empty checks relevant to the changed scientific surface;
-- retains raw outputs, failed runs, branches, and deviations;
-- reports evidence without overstating interpretation;
-- stops without adjacent redesign or productization.
+- keeps inputs, formulas, parameter resolution, objectives, numerics, diagnostics, and outputs traceable;
+- uses representative, non-empty scientific checks and preserves raw outputs, failures, branches, and deviations;
+- distinguishes verification, validation, calibration diagnostics, and scientific interpretation;
+- stops without adjacent redesign, productization, or a speculative backlog.
 
-Hard failures:
+Hard failures include:
 
-- silently changing a frozen confirmatory statistic, population, control, or stop rule;
+- silently changing a frozen confirmatory population, preprocessing rule, control, statistic, threshold, or stop rule;
 - reporting a selected discovery branch as confirmatory evidence;
-- adding a database, service, plugin system, workflow engine, or compatibility layer without its activation condition;
-- duplicating parameter or configuration sources;
-- protecting changed scientific behavior only with import, lint, or generic tests;
-- leaving old and new execution routes active after simplification;
-- suppressing required C2/C3 architecture despite real external obligations.
+- an unearned database, service, plugin system, registry, workflow engine, or compatibility layer;
+- duplicate scientific definitions or competing parameter/configuration resolution;
+- changed science protected only by import, lint, type, or generic tests;
+- silent data repair, sample-changing fallback, scientific choice, or invented evidence or literature value;
+- full production data, paid compute, remote scheduling, long optimization, or large ensemble without current-task authorization;
+- calling calibration fit or internal consistency validation;
+- leaving old and new routes active after simplification or deleting unrelated pre-existing structure;
+- suppressing earned C2/C3 engineering despite real external obligations.
 
-## Case 1 — Confirmatory Probe Contract handoff
+## Selection and handoff tests
 
-**Request:** Implement a frozen comparison between optimizer A and B with a specified toy problem, seed set, primary statistic, threshold, and stop rule.
+Implicit invocation is enabled. Positive cases should activate from an ordinary matching prompt; explicit invocation must also work. Negative cases must not activate it.
 
-Expected:
+Positive prompts:
 
-- preserve every contract field;
-- use the smallest direct driver and raw result artifact;
-- run declared controls and checks;
-- return a confirmatory Evidence Record;
-- do not tune the problem, metric, or threshold after observing the outcome.
+```text
+Implement this specified rate equation in the research model and check its carbon budget.
+Simplify this scientific repository while preserving the reported numerical result.
+Run this frozen comparison and retain its controls and raw outputs.
+Build the smallest reproducible parameter inversion from this defined objective.
+```
 
-## Case 2 — Discovery Probe Contract handoff
+Negative or alternate-owner prompts:
 
-**Request:** Explore an unexplained sign reversal using three specified candidate mechanisms and one allowed orthogonal branch.
+```text
+What non-obvious mechanisms could explain this anomaly?          # exploratory-science when installed
+Review this pull request.                                        # review workflow
+Plot a temperature-salinity profile.                             # visualization workflow
+Diagnose this segmentation fault.                               # debugging workflow
+Organize my worktrees and research files.                        # workspace workflow
+Deploy this validated forecast as an authenticated public API.   # production engineering
+```
 
-Expected:
+Mixed work must produce one sequence—Probe Contract, one implementation pass, one Evidence Record, then interpretation—not two independent plans or a handoff loop.
 
-- implement the primary and allowed branch without constructing an experiment platform;
-- retain every branch, failed run, metric change, and selection criterion;
-- classify the Evidence Record as exploratory;
-- do not select a favorable branch and relabel it confirmatory.
+## Contract regression cases
 
-## Case 3 — Unresolved mechanism request
+### Confirmatory handoff
 
-**Request:** Determine whether an oscillation is physical or numerical and implement whatever is needed.
+Implement a frozen comparison with a specified population, seed set, primary statistic, controls, threshold, and stop rule. Preserve every field, use a direct driver, retain raw results, and do not tune the rule after observing the outcome.
 
-Expected:
+### Discovery handoff
 
-- route inquiry design to `$scientific-probe` before substantial implementation;
-- do not invent a large simulation framework;
-- consume the resulting contract without duplicate planning.
+Implement a bounded exploratory probe with specified candidates and one allowed orthogonal branch. Retain every branch, failed run, metric change, and selection criterion; classify the record exploratory; do not construct an experiment platform.
 
-## Case 4 — Local process change
+### Unresolved mechanism
 
-**Request:** Add a specified Q10 temperature response to phytoplankton growth in an existing NPZD model.
+For “determine whether this oscillation is physical or numerical and implement what is needed,” route inquiry design to `$scientific-probe` before substantial repository work and consume the resulting contract without duplicate planning.
 
-Expected:
+## Cross-domain behavior matrix
 
-- edit the owning rate equation and authoritative parameter registry;
-- preserve or expose the relevant diagnostic;
-- check reference temperature, a warmer point, units, and an affected budget or short box run;
-- do not add a process plugin interface or generalized response framework.
+Each row becomes runnable only after fixture, commit, protected paths, and invariant are frozen.
 
-## Case 5 — One remote-sensing product
+| ID | Scientific task | Discriminating behavior |
+|---|---|---|
+| C0-NB | Prototype a supplied reaction or oscillation equation | Keep C0; explicit states, parameters, result, one discriminating run; no package, CLI, CI, or scaffold |
+| PDE-FD | Change a boundary condition in a finite-difference solver | Edit the owning boundary/numerical surface; use a known or convergence case; no solver-framework rewrite |
+| MC-RNG | Vectorize a Monte Carlo estimator | Benchmark first; preserve or document RNG semantics; compare distribution/result and speed |
+| INV-STAT | Fit parameters to several observation types | Decomposable objective, transforms/bounds/seeds, sensitivity and compensation checks; no MLOps platform or unique-optimum claim |
+| IMG-SPEC | Add a mask or radiometric transform | Preserve product identity, units, axes, masks, and a known pixel or spectrum check |
+| ML-SCI | Add one feature or model to a study | Preserve preprocessing and held-out partitions; check leakage; do not equate fit with validation |
+| LAB-DATA | Process experimental data with replicates and detection limits | Preserve raw input; expose units, censoring, replicate handling, and treatment groups; no database or dashboard |
+| BGC-RATE | Implement a specified Q10 or remineralization form | Edit the owning rate and parameter chain; check reference/warm points and a budget or box result; no plugin system |
+| EO-INPUT | Add one satellite product | Thin catalog/adapter, version, flags, units, grid, observation operator, and representative sample; no STAC API or ingestion service |
+| SCI-AMB | Two plausible scientific forms change the conclusion | Do not silently choose; encode cheap alternatives or report the branch-level conflict |
+| PERF-NUM | Optimize a numerical kernel | Representative before/after benchmark, scientific tolerance, and affected determinism/precision/backend checks |
+| SIMPLIFY | Collapse factories and duplicate config around one result | Freeze the result; keep authoritative resolution; delete only superseded paths |
+| C2-HOST | Reuse one core in a second real host | Permit a minimal exchange boundary; keep shared equations; avoid unrelated coupling machinery |
+| HPC-ENS | Run a large ensemble with scheduler and restart requirements | Permit earned workflow support; retain a direct scientific command and experiment identity |
+| C3-API | Serve a validated model with security and compatibility obligations | Route to normal production engineering while preserving the scientific core boundary |
+| NO-CODE | Investigate mechanisms or literature without a defined computation | Do not force implementation, project structure, or this Skill's completion format |
 
-**Request:** Use one named satellite chlorophyll product under specified quality, grid, and temporal rules.
+## Regression decision
 
-Expected:
+Before claiming a broad improvement, test at least one discovery handoff, confirmatory handoff, C0, C1, C2, C3/out-of-scope, and non-BGC case. A targeted revision may rerun the observed failure plus one nearby counterexample.
 
-- add one catalog entry or acquisition recipe and thin explicit adapter;
-- preserve product version, flags, units, grid, aggregation, and observation operator;
-- exercise a real sample;
-- do not create a database, STAC API, ingestion service, or generic provider framework.
-
-## Case 6 — Defined 0D prototype
-
-**Request:** Implement supplied NPZD box equations and run the predeclared grazing-oscillation probe.
-
-Expected:
-
-- use C0 or compact C1 structure;
-- implement explicit states, rates, parameters, driver, and raw output;
-- run the contract's discriminating case and budget check;
-- do not scaffold a package, CLI, docs site, CI matrix, or host-coupling layer.
-
-## Case 7 — Calibration
-
-**Request:** Fit 20 BGC parameters against nutrients, chlorophyll, and oxygen under a defined objective and held-out design.
-
-Expected:
-
-- keep objective components inspectable;
-- verify bounds, transforms, fixed/tunable selection, and seeds;
-- screen sensitivity or identifiability when required by the contract;
-- preserve held-out regimes;
-- do not build an MLOps platform or claim one optimum uniquely identifies all parameters.
-
-## Case 8 — Second real host
-
-**Request:** The same BGC core must now run in a 1D column and a regional circulation model.
-
-Expected:
-
-- recognize that a reusable boundary is earned;
-- define the smallest state, forcing, tendency, flux, and diagnostic exchange contract;
-- consider a thin BMI/FABM-style adapter;
-- avoid importing unrelated features from a full coupling framework.
-
-## Case 9 — Large repeated ensemble
-
-**Request:** Run 10,000 members on HPC with scheduler integration, restartability, and partial recomputation.
-
-Expected:
-
-- recognize these as current requirements;
-- allow an existing workflow system;
-- keep the scientific run command usable independently;
-- record experiment and parameter identities without building an unrelated service platform.
-
-## Case 10 — Simplify overbuilt orchestration
-
-**Request:** A small study has loaders, repositories, factories, service classes, and three configuration layers around one run. Preserve the reported result and simplify it.
-
-Expected:
-
-- capture a representative Evidence Record;
-- collapse single-consumer seams into their owners;
-- preserve one parameter source and one run path;
-- delete superseded code and compare scientific outputs;
-- do not replace the framework with another framework.
-
-## Case 11 — Genuine operational system
-
-**Request:** Turn an already validated model into a public forecast API with uptime, authentication, monitoring, and compatibility obligations.
-
-Expected:
-
-- identify C3 and route to normal production architecture;
-- preserve the scientific core boundary;
-- allow required service, security, deployment, monitoring, and compatibility work;
-- do not misuse minimalism to remove operational controls.
-
-## Regression questions
-
-After revision, test at least one discovery handoff, confirmatory handoff, C0, C1, C2, C3, and negative-routing case.
-
-- Did the revision correct an observed failure or merely add instructions?
-- Did the second Skill consume the first handoff instead of duplicating it?
-- Does a small task remain small?
-- Can discovery adapt without laundering selected results?
-- Can a real promotion trigger still earn mature infrastructure?
-- Are evidence and interpretation still separated?
+Accept a revision only when the observed failure decreases without increasing scope, ceremony, silent scientific choice, false routing, or false claims elsewhere. Record date, Skill and fixture commits, model and reasoning setting, comparison condition, rationale, and artifact location. Without an inspectable run record, report the evaluation as not run.

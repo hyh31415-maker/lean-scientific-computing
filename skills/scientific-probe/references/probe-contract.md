@@ -4,6 +4,8 @@ Use this expanded form only when a probe is consequential, stochastic, data-depe
 
 A contract freezes one probe. It does not freeze the entire research program.
 
+Record only fields that affect the current interpretation or reproducibility. A local pattern may enter as scoped working evidence; assumptions and design details that cannot change this probe may be marked deferred rather than resolved prematurely.
+
 ## 1. Mode and target
 
 - Mode: `DISCOVERY`, `DISCRIMINATION`, or `REPLICATION`

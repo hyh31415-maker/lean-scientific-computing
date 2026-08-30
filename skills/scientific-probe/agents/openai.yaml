@@ -1,6 +1,6 @@
 interface:
   display_name: "Scientific Probe"
-  short_description: "Discover mechanisms or freeze a decisive scientific test"
-  default_prompt: "Use $scientific-probe to select DISCOVERY, DISCRIMINATION, or REPLICATION mode, define a proportional Probe Contract, and interpret only the evidence actually produced."
+  short_description: "Freeze and interpret one scientific probe"
+  default_prompt: "Use $scientific-probe to turn this framed scientific target into one proportional Probe Contract and interpret only the evidence actually produced."
 policy:
   allow_implicit_invocation: true

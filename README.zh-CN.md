@@ -2,19 +2,24 @@
 
 本仓库把两个 Codex Skill 统筹为一套连续科研流程：
 
-- [`scientific-probe`](skills/scientific-probe)：负责判断**什么证据能够改变科学判断**。
+- [`scientific-probe`](skills/scientific-probe)：在问题已经形成后，负责**冻结并解释一项有边界的科学探针**。
 - [`lean-scientific-computing`](skills/lean-scientific-computing)：负责用**最小、透明、可核验的科研代码取得这些证据**。
 
 共同原则：
 
 > 假说可以大胆，结论必须保守，工程复杂度必须与当前科学问题相称。
 
+这里的“结论保守”不等于“行动停滞”。局部、稀疏或间接规律可以支持一项适用域明确、可逆的下一步探针；它们不必先升级为普适定律。不会改变当前科学解释的文件格式、框架和次要分析可以直接后置。
+
 两个 Skill 不合并。科研推理与科研实现具有不同的触发条件、输出和停止规则；分开后更容易正确路由，再通过明确合同完成交接。
 
 ## 连续工作流
 
 ```text
-尚未解决的问题、异常或结论
+开放式科研前沿（可选 exploratory-science）
+            |
+            v
+已界定的问题、候选机制或局部异常
             |
             v
     $scientific-probe
@@ -39,11 +44,13 @@ $lean-scientific-computing
 
 不得为了判断一个效应是否存在，先建设完整服务、框架或平台。
 
+如果本机安装了独立的 `exploratory-science`，开放式假说组合、概念模型发展和研究方向选择由它负责；只有当某个具体探针值得固定合同、复现规则或判别标准时，才交给 `scientific-probe`。快速、可逆的探索不需要增加一次交接。
+
 ## 发现阶段不强行套用验证阶段
 
 `scientific-probe` 会选择三种模式之一：
 
-- **DISCOVERY（发现）**：假说空间尚不清楚时，扩展机制候选、寻找异常并进行有边界的自适应探索。探索分支必须记录，但不能冒充预先设定的验证证据。
+- **DISCOVERY（发现）**：已经界定异常或搜索目标、但当前探针需要有限调整时，进行有边界的自适应探索。探索分支必须记录，不能冒充预先设定的验证证据。
 - **DISCRIMINATION（判别）**：已有可信竞争解释时，预先固定主判别量与规则。
 - **REPLICATION（复现）**：在重跑前明确总体、排除规则、统计量、成功或失败标准及停止条件。
 
@@ -53,7 +60,8 @@ Probe Contract 只固定当前探针，不冻结整个研究计划。意外结�
 
 | 用户请求 | 首选流程 |
 |---|---|
-| 这个异常还有哪些非显然机制？ | `$scientific-probe` 的 DISCOVERY 模式 |
+| 这个异常还有哪些非显然机制、下一步研究方向是什么？ | 已安装时使用 `exploratory-science` |
+| 为一个已经界定的异常固定下一项自适应探针 | `$scientific-probe` 的 DISCOVERY 模式 |
 | 区分 A 与 B 的最低成本实验是什么？ | `$scientific-probe` 的 DISCRIMINATION 模式 |
 | 复现一个结论，并预先定义失败 | 先 `$scientific-probe`，需要编码时再交给精益实现 |
 | 把已经明确的速率方程加入模型 | `$lean-scientific-computing` |
@@ -65,6 +73,8 @@ Probe Contract 只固定当前探针，不冻结整个研究计划。意外结�
 完整职责边界见 [`docs/coordination.md`](docs/coordination.md)。
 
 ## 本地安装两个 Skill
+
+两个 Skill 都允许 Codex 根据匹配的普通请求自动选择，也保留 `$scientific-probe` 和 `$lean-scientific-computing` 显式调用。
 
 仓库级：
 
@@ -100,5 +110,7 @@ cp -R skills/lean-scientific-computing ~/.agents/skills/
 - 每个 Skill 内有独立触发与行为测试；
 - [`evals/routing-prompts.csv`](evals/routing-prompts.csv) 检查模式、路由与交接；
 - [`evals/coordination-rubric.md`](evals/coordination-rubric.md) 检查合同完整性、探索质量、科研核验、工程克制和停止行为。
+
+这些文件目前是可复现的评测规范，不是“所有模型和运行环境均已通过”的声明。有效记录应包含固定的提示、fixture、模型与推理设置、权限、差异、命令、输出和评审结论。
 
 许可证：MIT。

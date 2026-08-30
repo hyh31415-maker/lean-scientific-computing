@@ -1,100 +1,84 @@
-# Scientific Verification
+# Verification, Validation, and Calibration Diagnostics
 
-Read this reference when selecting checks, modifying scientific behavior, changing calibration or optimization, or producing an Evidence Record.
+Read this reference when selecting scientific checks or changing scientific behavior, numerics, calibration, outputs, or performance.
 
-Verification is proportional to the scientific consequence. The goal is to expose a wrong result with the fewest meaningful checks, not to maximize test count or coverage.
+Use the fewest checks that can expose a wrong result. Keep three claims separate:
 
-When a Probe Contract exists, verification must show that implementation preserved the mode-appropriate controls, scientific population, primary observable, analysis or branch rule, and stop condition. For DISCOVERY, it must also show that all branches, failed attempts, and metric changes remain recorded and exploratory.
+- **Verification:** code implements the declared equations, algorithm, and numerical method.
+- **Validation:** model behavior agrees with relevant independent observations.
+- **Calibration diagnostics:** parameter estimation is reproducible, interpretable, and sufficiently identifiable for the claim.
 
-## Verification by project level
+One category does not prove another. When a Probe Contract exists, also verify that the implementation preserved its mode-appropriate population, controls, primary observable, rules, and stop condition. DISCOVERY checks must retain branches, failures, and metric changes as exploratory.
 
-| Level | Minimum useful evidence |
-|---|---|
-| C0 | Run the relevant cell or script on a representative case; inspect shapes, finite values, ranges, controls, the primary result, and branch log when exploratory |
-| C1 | Add focused checks for formulas, units, limiting behavior, budgets, representative deterministic runs, objective components, provenance, or output metadata |
-| C2 | Add interface contracts, multi-consumer cases, broader regression coverage, packaging checks, and user-facing examples |
-| C3 | Apply full reliability, security, deployment, compatibility, and observability gates in addition to scientific checks |
+## Execution scale and cost
 
-Do not use a C0 shortcut for a consequential result merely because the project is small. Do not impose C2/C3 infrastructure on a reversible C0 probe.
+Use the smallest representative dataset and shortest non-empty run that exercise the changed path: a cropped scene, short window, small grid, box case, few optimizer iterations, or reduced ensemble.
 
-## Checks by scientific surface
+Full production data, paid compute, remote scheduling, long optimization, and large ensembles require an explicit current-task request. Never overwrite an existing result for a smoke test.
 
-### Input and preprocessing
+## Verification
 
-- Exercise at least one real or faithful representative input.
-- Check required variables, dimensions, coordinates, units, calendars, and valid ranges.
-- Inspect flags, masks, missingness, duplicates, and boundary selections.
-- Verify conversion, aggregation, interpolation, or regridding with a small known case.
-- Confirm authoritative input is not overwritten.
-- Confirm preprocessing matches frozen population and exclusion rules for confirmatory work; retain all sample-changing discovery branches.
+Select only relevant checks.
 
-### Formula or process rate
+### Inputs and preprocessing
 
-Choose the relevant subset:
+- Exercise one real or faithful representative input.
+- Check relevant variables, shapes/dimensions, coordinates, units, calendars, flags, masks, missingness, and ranges.
+- Probe important selection boundaries and one known conversion, aggregation, interpolation, regridding, normalization, or split.
+- Confirm authoritative input remains unchanged and confirmatory population/exclusion rules did not drift.
 
-- one known-value calculation;
-- zero-input, saturation, or other limiting cases;
-- expected sign and monotonicity;
-- dimensional consistency;
-- response at scientifically meaningful points;
-- continuity or intended threshold behavior;
-- independent hand calculation or simpler formulation.
+### Equations, processes, and budgets
 
-One or two discriminating cases are better than an exhaustive generic edge matrix.
+- Compare a known value with a hand calculation or simpler independent formulation.
+- Check relevant dimensions, zero/limit behavior, sign, monotonicity, continuity, or thresholds.
+- Check affected mass, elemental, energy, charge, or probability budgets with external terms accounted for.
+- Check diagnostic identities such as a net rate equaling its documented component sum.
 
-### Coupled scientific system
-
-- Use a short deterministic toy, box, or reduced case when local processes changed.
-- Check relevant mass, elemental, charge, DIC, alkalinity, energy, or probability budgets with external terms accounted for.
-- Check diagnostic identities and component sums.
-- Distinguish numerical drift from intended open-system sources and sinks.
-- Add spatial or transport cases only when the conclusion depends on spatial coupling.
+One or two discriminating cases are preferable to a low-information combinatorial suite.
 
 ### Solver and numerics
 
-- Compare against analytic, quasi-analytic, or deliberately simplified cases when available.
-- Check step size, tolerance, or resolution only over the range relevant to the decision.
-- Verify convergence criteria and failure reporting.
-- Record seeds while preserving intended stochastic behavior.
-- Do not tune numerical settings after seeing the desired answer without reporting the deviation. Keep discovery tuning branches complete rather than only the favorable run.
+- Compare with an analytic, quasi-analytic, or simplified case when available.
+- Test step size, tolerance, resolution, and convergence only where they could affect the conclusion.
+- Surface failure and non-convergence rather than silently converting them into results.
+- For stochastic work, record seeds and compare distributions or summaries appropriate to the claim; a fixed-seed regression alone is insufficient.
+- Do not tune numerical settings after seeing the desired confirmatory answer. Preserve discovery tuning branches rather than only the favorable run.
 
-### Objective and calibration
+### Outputs and provenance
 
-- Save interpretable objective components.
-- Verify parameter ordering, fixed/tunable selection, bounds, and transforms.
-- Check that missingness and weights do not silently drop or dominate data.
-- Screen sensitivity before expensive optimization of many interacting parameters.
-- Check gradients when the conclusion depends on them.
-- Use multi-start or alternative initialization when local minima are consequential.
-- Validate on held-out regimes defined before result inspection.
-- Report practical non-identifiability instead of treating one optimum as uniquely true.
+- Reopen the written artifact.
+- Check relevant names, dimensions, coordinates, units, missing values, and conventions.
+- Confirm diagnostics, configuration, and resolved parameters belong to the same run and outputs do not overwrite inputs.
+- Retain raw primary output, controls, failed runs, exploratory branches, and declared contract deviations.
 
-Escalate to ensemble, Bayesian, workflow, or external inversion machinery only when it is a current research requirement.
+## Validation
 
-### Output and provenance
+Use independent evidence appropriate to the claim, such as held-out time, space, depth, treatment, instrument, or environmental regime. Preserve the observation operator and preprocessing, and report what was held out and which discriminator or metric was used.
 
-- Reopen the written artifact rather than trusting the in-memory object.
-- Check names, dimensions, coordinates, units, missing values, and metadata.
-- Confirm diagnostics correspond to the same run and parameter snapshot.
-- Confirm outputs do not overwrite authoritative inputs.
-- Record provenance that can reproduce or interpret the result.
-- Include run classification, failures, branches, and contract deviations in the Evidence Record.
+A calibration fit is not validation. Verification, internal consistency, visual plausibility, and agreement with training data are not evidence that the model represents nature. When no independent observation exists, state that validation was not performed.
 
-## Refactor and simplification checks
+## Calibration diagnostics
 
-When scientific behavior should remain unchanged:
+Inspect the relevant subset:
 
-1. Capture a representative Evidence Record before the edit.
-2. Remove indirection or duplicate paths incrementally.
-3. Compare meaningful outputs within a tolerance justified by the numerical method.
-4. Confirm the old path, configuration, or artifact is gone.
-5. Run the same command through the final direct route.
-6. Confirm the Probe Contract or declared scientific behavior did not drift.
+- objective components by dataset or variable;
+- observation mapping, missing-data treatment, scaling, weights, covariance, or likelihood;
+- parameter order, fixed/tunable selection, bounds, transforms, priors, seed, and initialization;
+- sensitivity before expensive joint optimization;
+- gradient checks when a result depends on gradients;
+- alternate starts when consequential local minima are plausible;
+- practical identifiability, compensation, and boundary-hitting solutions.
 
-An import test, type check, or generic unit suite cannot replace this comparison.
+Use ensemble, Bayesian, data-assimilation, or PEST++ machinery only when uncertainty or inverse structure is part of the research requirement. Do not present one optimum as uniquely true without evidence.
+
+## Performance and simplification
+
+For performance work, benchmark a representative measured bottleneck before editing. Report both performance and scientific-result deltas under comparable conditions, with a method-justified tolerance. Inspect affected reduction order, determinism, precision, memory layout, integration trajectory, random streams, and backend consistency.
+
+For behavior-preserving simplification, capture a meaningful output, budget, or objective before editing; compare the same representative case afterward; confirm the contract or declared science did not drift and only the superseded route disappeared.
+
+An import, lint, type check, or generic suite cannot replace either comparison.
 
 ## Completion claims
 
-State exactly which commands and cases ran. Distinguish source reading, synthetic checks, real-data smoke tests, partial runs, and full experiments. Do not call a skipped, empty, or setup-only command a pass.
-
-Stop when the requested result works and the checks capable of falsifying its scientific meaning have completed. Additional coverage, framework migration, performance tuning, and documentation are separate work unless they are current requirements.
+State commands, data scale, and cases actually run. Distinguish inspection, synthetic checks, representative-data smoke tests, calibration diagnostics, validation, and full experiments. A skipped, empty, setup-only, or uninspected output is not a pass. Stop after the requested result and its falsifying checks are complete.

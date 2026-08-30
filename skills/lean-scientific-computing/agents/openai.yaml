@@ -1,6 +1,6 @@
 interface:
   display_name: "Lean Scientific Computing"
-  short_description: "Implement scientific evidence with one auditable code path"
-  default_prompt: "Use $lean-scientific-computing to preserve the Probe Contract, implement the smallest direct computation, run meaningful scientific checks, and return a complete Evidence Record."
+  short_description: "Build auditable research code without project bloat"
+  default_prompt: "Use $lean-scientific-computing to implement this defined research computation through one auditable path, preserving any Probe Contract and adding only justified structure."
 policy:
   allow_implicit_invocation: true

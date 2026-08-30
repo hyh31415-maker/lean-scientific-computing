@@ -18,6 +18,24 @@ Symptom: an early discovery problem is forced into binary hypotheses, a numerica
 
 Correction: use DISCOVERY mode, define a compact search target and branch rule, and freeze only the current probe.
 
+## Evidence paralysis
+
+Symptom: the agent refuses to form a scoped working hypothesis or choose a reversible next probe until comprehensive or universal evidence exists.
+
+Correction: separate the evidence needed for a strong claim from the evidence needed for the next action. State the local scope and assumptions, then run the cheapest probe capable of changing the decision.
+
+## Local-pattern erasure
+
+Symptom: a repeated local, regional, seasonal, taxonomic, or regime-specific pattern is dismissed because it is not yet a universal law.
+
+Correction: treat the pattern as scoped evidence, encode its domain of validity, and test the nearest transfer boundary or competing explanation. Do not generalize it silently, but do not discard it merely for being local.
+
+## Non-blocking design fixation
+
+Symptom: file layout, framework choice, exhaustive edge cases, or a secondary analysis detail consumes the run even though it cannot change the current scientific interpretation.
+
+Correction: record the assumption or deferral once, freeze only inference-relevant choices, and continue. Reopen the detail only when it reaches the current probe's critical path.
+
 ## Engineering substitution
 
 Symptom: the run produces a polished framework, pipeline, or test suite but never defines evidence that would change the scientific state.

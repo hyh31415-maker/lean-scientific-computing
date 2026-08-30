@@ -1,110 +1,76 @@
-# Ocean BGC and Earth Observation
+# Ocean BGC and Earth-Observation Heuristics
 
-Read this reference for oceanography, aquatic biogeochemistry, remote sensing, microbial processes, organic carbon, or coupled Earth-system work. Apply only the relevant sections.
+Read this optional reference for oceanography, aquatic biogeochemistry, remote sensing, microbial processes, organic carbon, or coupled Earth-system work. Use only relevant heuristics; they are not a mandatory project structure or stage sequence.
 
-## Separate host numerics from biogeochemistry
+## Host numerics and biogeochemistry
 
-Use the responsibility boundary demonstrated by MARBL and FABM:
+A useful boundary reflected in MARBL and FABM is:
 
 ```text
 host: grid, transport, diffusion, boundary numerics, time stepping
-BGC:  local sources and sinks, transformations, exchanges, diagnostics
+BGC:  local sources/sinks, transformations, exchanges, diagnostics
 ```
 
-For tracer state \(\chi\), the BGC component should expose the scientific right-hand side \(B_\chi(x)\) or an equivalent tendency. The host may add transport and integration. Keep air-sea, sediment, or boundary exchanges explicit about which side owns the flux and which side applies it.
+For tracer \(\chi\), the BGC core may expose local tendency \(B_\chi(x)\) while the host applies transport and integration. State ownership of air-sea, sediment, and boundary fluxes explicitly.
 
-Do not create a generic host interface for one host. Start with a direct call or thin adapter. Promote to a BMI/FABM-style interface only after a second real host or a fixed external coupling contract exists.
+Do not create a generic host interface for one host. Start with a direct call or thin adapter; a BMI/FABM-style boundary is earned by a second real host or fixed external contract.
 
-## Express processes and budgets visibly
+## Processes and budgets
 
-For a new or substantially revised multi-pool model, a useful form is:
+For a new or substantially revised multi-pool model, this pattern can expose ownership:
 
 ```text
 process_rates = R(state, forcing, parameters)
 bgc_tendency  = S @ process_rates
 ```
 
-`R` contains growth, uptake, grazing, mortality, remineralization, aggregation, dissolution, adsorption, sinking, gas exchange, or other mechanisms. `S` maps those rates into tracer or pool tendencies through stoichiometry.
+`R` contains mechanisms such as growth, uptake, grazing, mortality, remineralization, aggregation, dissolution, sorption, sinking, or gas exchange. `S` maps them to pools through stoichiometry. This is optional: keep a direct right-hand side when clearer. Each process must remain traceable to pools, parameters, units, and diagnostics.
 
-This is a preference, not a compulsory refactor. Keep a clear direct RHS when it is more readable in the existing model. The invariant is that a reviewer can trace each process to affected pools, parameters, units, and diagnostics.
+Expose relevant C, N, P, Si, Fe, O, charge, DIC, or alkalinity budgets. Separate internal transfers from gas exchange, burial, deposition, sediment exchange, and open-boundary fluxes. Do not apply a closed-box conservation test without accounting for external terms.
 
-When relevant, expose budgets for C, N, P, Si, Fe, O, charge, DIC, or alkalinity. Distinguish internal transfers from external sources, sinks, burial, gas exchange, and open-boundary fluxes. A closed-box conservation test must not be applied to a deliberately open system without accounting for those terms.
+## Discriminating geometry
 
-## Begin with the smallest discriminating geometry
-
-Use a 0D or box driver to test local BGC mechanisms before debugging transport and grid behavior together. Progress only as the scientific question requires:
+Use the least expensive geometry that answers the question:
 
 ```text
-rate function -> closed or forced box -> 1D column -> regional/full host
+rate function | closed/forced box | 1D column | regional/full host
 ```
 
-A higher-dimensional host is not stronger evidence when the uncertainty is in a local rate law. Conversely, a box model cannot validate transport-dependent conclusions; promote geometry when spatial coupling is part of the hypothesis.
+These are choices, not a required progression. A rate function or box isolates local processes; a spatial host is needed when mixing, transport, boundaries, or heterogeneity affect the conclusion. Higher dimension is not stronger evidence for uncertainty in a local rate law.
 
-## States, forcings, and diagnostics
+## Variable roles and observations
 
-Classify variables explicitly:
+Distinguish:
 
-- **prognostic state**: integrated pools or tracers;
-- **forcing**: temperature, irradiance, mixed-layer depth, velocity, deposition, or prescribed external state;
-- **diagnostic**: process rates, limitation factors, production, respiration, export, residuals, and budgets;
-- **observation operator**: transformation from model state to the measured proxy or product.
+- **prognostic state:** integrated pools or tracers;
+- **forcing:** prescribed temperature, light, mixing, velocity, deposition, or external state;
+- **diagnostic:** rates, limitation factors, production, respiration, export, residuals, and budgets;
+- **observation operator:** mapping from model state to a measured proxy or product.
 
-Do not treat remote-sensing products or microbial proxies as direct model states unless the observation operator justifies that equivalence.
+Do not treat remote-sensing, optical, molecular, or microbial measurements as model states unless the observation operator justifies that equivalence.
 
-## Microbial and organic-carbon models
+## Microbial and organic carbon
 
-Make pool definitions and transformations explicit:
+Expose definitions that affect interpretation: DOC/POC and lability classes; represented biomass or functional groups; included uptake, growth-efficiency, respiration, mortality, lysis, aggregation, sorption, and photochemical terms; fixed/flexible elemental ratios; parameterization regime and timescale; and the measured proxy for each modeled quantity.
 
-- operational definition of DOC, POC, dissolved/particulate, labile/semi-labile/refractory, or molecular classes;
-- microbial biomass and functional groups represented;
-- substrate uptake, growth efficiency, respiration, mortality, viral lysis, aggregation, sorption, and photochemical terms included;
-- elemental ratios and whether they are fixed, flexible, or diagnostic;
-- timescale and environmental regime for each parameterization;
-- measured proxy corresponding to each modeled quantity.
-
-Local patterns may justify a working mechanism or regime-dependent parameter. Encode the scope of that assumption in the parameter or experiment definition; do not block the model until a universal law is available.
+When a user, repository, or verified source specifies a local mechanism, encode its scope in the parameter or experiment. If competing mechanisms change the conclusion, use cheap alternative experiments or report the conflict; do not select one because it is generically common.
 
 ## Earth-observation inputs
 
-For NetCDF or Zarr products, preserve labeled dimensions and CF-style metadata: variable names, units, latitude/longitude or projected coordinates, depth or vertical convention, time and calendar, flags, valid ranges, and grid mapping.
+For NetCDF or Zarr, preserve labeled dimensions and relevant CF-style metadata: names, units, coordinates, vertical convention, time/calendar, flags, ranges, and grid mapping.
 
-For remote-sensing products, make these choices visible when relevant:
+For remote-sensing or gridded products, expose the applicable product/level/algorithm/version, quality and cloud/ice/land treatment, spatial support and resampling, temporal compositing and missingness, uncertainty layer, coordinate system, and observation operator.
 
-- product and processing level/version;
-- retrieval algorithm or band-derived quantity;
-- quality flags, masks, cloud/ice/land treatment;
-- native spatial support and resampling method;
-- temporal compositing and missing-observation behavior;
-- uncertainty or confidence layer;
-- coordinate reference system;
-- observation operator linking the product to the BGC state.
+Use a small manifest for a few assets. Use a static STAC catalog when many assets need discovery; a STAC API or database requires a current serving or repeated-query need.
 
-Use a small manifest for a few assets. Use a static STAC catalog when many spatiotemporal assets must be indexed or discovered. Add a STAC API or database only when serving or repeated remote search is a present requirement.
+## Optional BGC calibration heuristics
 
-## Calibration sequence for BGC models
+- Verify nominal behavior, units, limits, and budgets before fitting.
+- Tune only parameters informed by observations; screen sensitivity and practical identifiability before expensive joint fitting.
+- Keep objective components and parameter compensation visible.
+- Use held-out seasons, regions, depths, treatments, or regimes for validation claims.
+- Add Bayesian, ensemble, assimilation, or PEST++ machinery only when uncertainty or inverse structure is part of the research question.
 
-1. Check nominal behavior, units, limiting cases, and budgets.
-2. Identify parameters that are actually tunable from the available observations.
-3. Screen sensitivity before optimizing a large interacting parameter set.
-4. Fix, aggregate, or condition weakly identifiable parameters rather than letting an optimizer choose arbitrary compensating values.
-5. Fit with an explicit decomposable objective and appropriate parameter transforms.
-6. Validate on held-out seasons, regions, depths, perturbations, or environmental regimes.
-7. Add Bayesian, ensemble, or PEST++ machinery only when uncertainty, data assimilation, or high-dimensional inverse structure is itself part of the research result.
+Apply only relevant items; do not force a calibration ceremony onto a local change.
 
-## Mature-project lessons to promote
-
-- MARBL: the host computes transport and time evolution; the BGC library computes sources, sinks, exchanges, and intermediate diagnostics.
-- FABM: models, drivers, configuration, and test cases are distinct; a 0D driver provides a low-cost scientific proving ground.
-- OceanBioME: domain modules can coexist with a compact box-model driver rather than forcing all work through a full spatial model.
-- AIBECS: start repository guidance with the governing equation and a short runnable recipe; keep parameter units, bounds, priors, optimizability, and references visible.
-
-Do not promote their compiler matrices, language-specific metaprogramming, GPU infrastructure, plugin graphs, release machinery, or compatibility layers into a small research project.
-
-Primary references:
-
-- https://marbl.readthedocs.io/en/latest/dev-guide/introduction.html
-- https://github.com/fabm-model/fabm
-- https://github.com/OceanBioME/OceanBioME.jl
-- https://github.com/JuliaOcean/AIBECS.jl
-- https://cfconventions.org/
-- https://stacspec.org/
+Design basis: [MARBL](https://marbl.readthedocs.io/en/latest/dev-guide/introduction.html), [FABM](https://github.com/fabm-model/fabm), [OceanBioME](https://github.com/OceanBioME/OceanBioME.jl), [AIBECS](https://github.com/JuliaOcean/AIBECS.jl), [CF Conventions](https://cfconventions.org/), and [STAC](https://stacspec.org/).
